@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryItem">
+    <SELECT><![CDATA[
+      SELECT
+        t.ITEM_CD as itemCd,
+        t.ITEM_NAME as itemName,
+        t.START_DT as startDt,
+        t.ITEM_DESC as itemDesc
+      from T_DEF_ITEM t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <itemCd>and t.ITEM_CD = ?</itemCd>
+      <itemName>and t.ITEM_NAME = ?</itemName>
+      <startDt>and t.START_DT = ?</startDt>
+      <itemDesc>and t.ITEM_DESC = ?</itemDesc>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

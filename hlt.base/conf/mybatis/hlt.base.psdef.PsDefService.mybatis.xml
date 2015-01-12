@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hlt.base.psdef">
+	
+	<insert id="addPsDef"  parameterType="map">
+		INSERT INTO hlt_t20_psdef(
+				USER_ID,
+				PS_MDD,
+				PS_FS,
+				PS_JSFS,
+				PS_DJ
+		)	
+		VALUES (
+			#{userId},
+			#{psMdd},
+			#{psfs},
+			#{psJsfs},
+			#{psDj}		
+		)
+	</insert>
+	
+	<select id="queryPsDef" resultType="map" parameterType="map" teradataOrderBy="userId"  >
+		SELECT USER_ID AS userId,
+					 PS_MDD as psMdd,
+					 PS_FS  as psfs,
+					 PS_JSFS as psJsfs,
+					 PS_DJ as psDj
+		 	FROM hlt_t20_psdef
+		<where> 	
+		 	<if test="userId !=null and ''!=userId"> USER_ID = #{userId} </if>
+		</where>	
+	</select>	
+		
+	<select id="queryPsDefTotal" resultType="map" parameterType="map"  >
+		SELECT count(1) cnt FROM hlt_t20_psdef
+		<where> 	
+		 	<if test="userId !=null and ''!=userId"> USER_ID = #{userId} </if>
+		</where>		
+	</select>
+	
+	
+	
+	
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryProd">
+    <SELECT><![CDATA[
+      SELECT
+        t.PROD_CD as prodCd,
+        t.PROD_NAME as prodName,
+        t.FROM_APP as fromApp,
+        t.START_DT as startDt
+      from T_DEF_PROD t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <prodCd>and t.PROD_CD = ?</prodCd>
+      <prodName>and t.PROD_NAME = ?</prodName>
+      <fromApp>and t.FROM_APP = ?</fromApp>
+      <startDt>and t.START_DT = ?</startDt>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

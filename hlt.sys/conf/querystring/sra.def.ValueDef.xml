@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryValueDef">
+    <SELECT><![CDATA[
+      SELECT
+        t.VALUE_CD as valueCd,
+        t.VALUE_NAME as valueName,
+        t.DATA_TYPE as dataType,
+        t.VALUE_DESC as valueDesc
+      from T_SYS_VALUE_DEF t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <valueCd>and t.VALUE_CD = ?</valueCd>
+      <valueName>and t.VALUE_NAME = ?</valueName>
+      <dataType>and t.DATA_TYPE = ?</dataType>
+      <valueDesc>and t.VALUE_DESC = ?</valueDesc>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

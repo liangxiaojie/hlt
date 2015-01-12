@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryCodeCat">
+    <SELECT><![CDATA[
+      SELECT
+        t.CAT_CODE as catCode,
+        t.CAT_NAME as catName,
+        t.CAT_MEMO as catMemo
+      from T_SYS_CODE_CAT t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <catCode>and t.CAT_CODE = ?</catCode>
+      <catName>and t.CAT_NAME = ?</catName>
+      <catMemo>and t.CAT_MEMO = ?</catMemo>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

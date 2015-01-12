@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryGl">
+    <SELECT><![CDATA[
+      SELECT
+        t.GL_CD as glCd,
+        t.GL_LEVEL as glLevel,
+        t.SUPER_CD as superCd,
+        t.GL_NAME as glName,
+        t.BAL_DIR as balDir,
+        t.START_DT as startDt
+      from T_DEF_GL t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <glCd>and t.GL_CD = ?</glCd>
+      <glLevel>and t.GL_LEVEL = ?</glLevel>
+      <superCd>and t.SUPER_CD = ?</superCd>
+      <glName>and t.GL_NAME = ?</glName>
+      <balDir>and t.BAL_DIR = ?</balDir>
+      <startDt>and t.START_DT = ?</startDt>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryMenu">
+    <SELECT><![CDATA[
+      SELECT
+        t.MENU_CODE as menuCode,
+        t.MENU_NAME as menuName,
+        t.MENU_URL as menuUrl,
+        t.PARENT_CODE as parentCode,
+        t.MENU_ORDER as menuOrder,
+        t.EXT_CONFIG as extConfig,
+        t.MENU_DESC as menuDesc
+      from T_URM_MENU t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <menuCode>and t.MENU_CODE = ?</menuCode>
+      <menuName>and t.MENU_NAME = ?</menuName>
+      <menuUrl>and t.MENU_URL = ?</menuUrl>
+      <parentCode>and t.PARENT_CODE = ?</parentCode>
+      <menuOrder>and t.MENU_ORDER = ?</menuOrder>
+      <extConfig>and t.EXT_CONFIG = ?</extConfig>
+      <menuDesc>and t.MENU_DESC = ?</menuDesc>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

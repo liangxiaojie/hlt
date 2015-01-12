@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.urm">
+  <insert id="insertMenu" parameterType="sra.urm.vo.Menu">
+     insert into T_URM_MENU
+       (MENU_CODE,MENU_NAME,MENU_URL,PARENT_CODE,MENU_ORDER,EXT_CONFIG,MENU_DESC) values 
+       (#{menuCode},#{menuName},#{menuUrl},#{parentCode},#{menuOrder},#{extConfig},#{menuDesc})
+  </insert>
+  <insert id="addMenu" parameterType="sra.urm.vo.Menu">
+     	insert into [T_URM_MENU] ([MENU_CODE],[MENU_NAME],[MENU_URL],[PARENT_CODE],[MENU_ORDER],[EXT_CONFIG],[MENU_DESC]) values 
+     	(#{menuCode,jdbcType=VARCHAR},#{menuName,jdbdType=VARCHAR},#{menuUrl,jdbcType=VARCHAR},#{parentCode,jdbcType=VARCHAR},#{menuOrder,jdbcType=INTEGER},#{extConfig,jdbcType=VARCHAR},#{menuDesc,jdbcType=VARCHAR})
+     </insert>
+  <delete id="deleteMenu" parameterType="sra.urm.vo.Menu">
+     delete from T_URM_MENU 
+       where MENU_CODE = #{menuCode} 
+  </delete>
+  <delete id="deleteMenus" parameterType="Map">
+		delete from [T_URM_MENU] where [MENU_CODE] in 
+		<foreach item="item" index="index" collection="menuCodes" open="(" separator="," close=")" >
+			#{item}		
+			</foreach>
+	</delete>
+  <update id="updateMenu" parameterType="sra.urm.vo.Menu">
+     update T_URM_MENU 
+       <set>
+       <if test="menuCode != null">MENU_CODE = #{menuCode},</if>
+       <if test="menuName != null">MENU_NAME = #{menuName},</if>
+       <if test="menuUrl != null">MENU_URL = #{menuUrl},</if>
+       <if test="parentCode != null">PARENT_CODE = #{parentCode},</if>
+       <if test="menuOrder != null">MENU_ORDER = #{menuOrder},</if>
+       <if test="extConfig != null">EXT_CONFIG = #{extConfig},</if>
+       <if test="menuDesc != null">MENU_DESC = #{menuDesc},</if>
+       </set>
+       where MENU_CODE = #{menuCode} 
+  </update>
+  <select id="loadMenu" resultType="sra.urm.vo.Menu" parameterType="sra.urm.vo.Menu">
+     select 
+       MENU_CODE as menuCode,
+       MENU_NAME as menuName,
+       MENU_URL as menuUrl,
+       PARENT_CODE as parentCode,
+       MENU_ORDER as menuOrder,
+       EXT_CONFIG as extConfig,
+       MENU_DESC as menuDesc
+     from T_URM_MENU 
+     where MENU_CODE = #{menuCode} 
+  </select>
+  <select id="getRootMenu" resultType="sra.urm.vo.Menu" parameterType="map">
+     select 
+       MENU_CODE as menuCode,
+       MENU_NAME as menuName,
+       MENU_URL as menuUrl,
+       PARENT_CODE as parentCode,
+       MENU_ORDER as menuOrder,
+       EXT_CONFIG as extConfig,
+       MENU_DESC as menuDesc
+     from T_URM_MENU 
+     where MENU_CODE = PARENT_CODE 
+  </select>
+  <select id="getMenu" parameterType="Map" resultType="sra.urm.vo.Menu" flushCache="false" useCache="false">
+     	SELECT [MENU_CODE] as "menuCode",
+     	[MENU_NAME] as "menuName",
+     	[MENU_URL] as "menuUrl",
+     	[PARENT_CODE] as "parentCode",
+     	[MENU_ORDER] as "menuOrder",
+     	[EXT_CONFIG] as "extConfig",
+     	[MENU_DESC] as "menuDesc"
+     	FROM [T_URM_MENU] WHERE [MENU_CODE]=#{menuCode}
+     </select>
+  <select id="queryMenus" parameterType="Map"
+		resultType="sra.urm.vo.Menu" flushCache="false" useCache="false"
+		teradataOrderBy="menu_code">
+		select [MENU_CODE] as "menuCode",
+		[MENU_NAME] as "menuName",
+		[MENU_URL] as "menuUrl",
+		[PARENT_CODE] as "parentCode",
+		[MENU_ORDER] as "menuOrder",
+		[EXT_CONFIG] as "extConfig",
+		[MENU_DESC] as "menuDesc" 
+		FROM [T_URM_MENU]
+		WHERE 1=1
+		<if test="menuCode!=null">
+			and [MENU_CODE]=#{menuCode}
+     		</if>
+		<if test="menuName!=null">
+			and [MENU_NAME] like #{menuName}     		
+     		</if>
+		<if test="menuUrl!=null">
+			and [MENU_URL]=#{menuUrl}
+     		</if>
+		<if test="parentCode!=null">
+			and [PARENT_CODE]=#{parentCode}	
+     		</if>
+		<if test="menuOrder!=null">
+			and [MENU_ORDER]=#{menuOrder}
+     		</if>
+		<if test="extConfig!=null">
+			and [EXT_CONFIG]=#{extConfig}
+     		</if>
+		<if test="menuDesc!=null">
+			and [MENU_DESC] like #{menuDesc}
+     		</if>
+	</select>
+	<select id="queryMenuBases" parameterType="Map"
+		resultType="sra.urm.vo.MenuBase" flushCache="false" useCache="false"
+		teradataOrderBy="menu_code">
+		select [MENU_CODE] as "menuCode",
+		[MENU_NAME] as "menuName",
+		[MENU_URL] as "menuUrl",
+		[PARENT_CODE] as "parentCode",
+		[MENU_ORDER] as "menuOrder",
+		[EXT_CONFIG] as "extConfig",
+		[MENU_DESC] as "menuDesc" 
+		FROM [T_URM_MENU]
+		WHERE 1=1
+		<if test="menuCode!=null">
+			and [MENU_CODE]=#{menuCode}
+     		</if>
+		<if test="menuName!=null">
+			and [MENU_NAME] like #{menuName}     		
+     		</if>
+		<if test="menuUrl!=null">
+			and [MENU_URL]=#{menuUrl}
+     		</if>
+		<if test="parentCode!=null">
+			and [PARENT_CODE]=#{parentCode}	
+     		</if>
+		<if test="menuOrder!=null">
+			and [MENU_ORDER]=#{menuOrder}
+     		</if>
+		<if test="extConfig!=null">
+			and [EXT_CONFIG]=#{extConfig}
+     		</if>
+		<if test="menuDesc!=null">
+			and [MENU_DESC] like #{menuDesc}
+     		</if>
+	</select>
+	<select id="queryMenus4Count" parameterType="Map" resultType="hashmap" flushCache="false" useCache="true">
+		SELECT count(1) as "cnt" FROM [T_URM_MENU] where 1=1
+		<if test="menuCode!=null">
+			and [MENU_CODE]=#{menuCode}
+     		</if>
+		<if test="menuName!=null">
+			and [MENU_NAME]=#{menuName}     		
+     		</if>
+		<if test="menuUrl!=null">
+			and [MENU_URL]=#{menuUrl}
+     		</if>
+		<if test="parentCode!=null">
+			and [PARENT_CODE]=#{parentCode}	
+     		</if>
+		<if test="menuOrder!=null">
+			and [MENU_ORDER]=#{menuOrder}
+     		</if>
+		<if test="extConfig!=null">
+			and [EXT_CONFIG]=#{extConfig}
+     		</if>
+		<if test="menuDesc!=null">
+			and [MENU_DESC]=#{menuDesc}
+     		</if>
+	</select>
+</mapper>

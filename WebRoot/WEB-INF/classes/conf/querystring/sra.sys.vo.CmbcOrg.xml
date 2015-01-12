@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryCmbcOrg">
+    <SELECT><![CDATA[
+      SELECT
+        t.ORG_NUM as orgNum,
+        t.MANAGE_PARENT_ORG as manageParentOrg,
+        t.ORG_FULL_NAME as orgFullName,
+        t.ORG_NAME as orgName,
+        t.ORG_LEVEL as orgLevel,
+        t.COUNTRY_AREA_CD as countryAreaCd,
+        t.ORG_ADDR as orgAddr,
+        t.ORG_ZIP_CD as orgZipCd,
+        t.ORG_TEL as orgTel,
+        t.ACCT_PARENT_ORG as acctParentOrg,
+        t.BELONG_TREAS_CD as belongTreasCd,
+        t.ZONE_CD as zoneCd,
+        t.ORG_ORG_CD as orgOrgCd,
+        t.ORG_LKMAN as orgLkman,
+        t.BIC_CD as bicCd,
+        t.LIQD_CENTER_CD as liqdCenterCd,
+        t.PAYMENT_ORG_NUM as paymentOrgNum,
+        t.CRSPD_DIST_REGION_CD as crspdDistRegionCd,
+        t.CHARGE_REGION_CD as chargeRegionCd,
+        t.INDV_CRDT_ORG_CD as indvCrdtOrgCd,
+        t.CORP_CRDT_ORG_CD as corpCrdtOrgCd,
+        t.CRDT_SYS_ZONE_CD as crdtSysZoneCd,
+        t.INVALID_IND as invalidInd,
+        t.SM_IND as smInd,
+        t.OPEN_DT as openDt,
+        t.ETL_TX_DT as etlTxDt,
+        t.DATA_SRC_TABLE_NAME as dataSrcTableName,
+        t.ETL_JOB_NUM as etlJobNum
+      from T_SYS_CMBC_ORG t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <orgNum>and t.ORG_NUM = ?</orgNum>
+      <manageParentOrg>and t.MANAGE_PARENT_ORG = ?</manageParentOrg>
+      <orgFullName>and t.ORG_FULL_NAME = ?</orgFullName>
+      <orgName>and t.ORG_NAME = ?</orgName>
+      <orgLevel>and t.ORG_LEVEL = ?</orgLevel>
+      <countryAreaCd>and t.COUNTRY_AREA_CD = ?</countryAreaCd>
+      <orgAddr>and t.ORG_ADDR = ?</orgAddr>
+      <orgZipCd>and t.ORG_ZIP_CD = ?</orgZipCd>
+      <orgTel>and t.ORG_TEL = ?</orgTel>
+      <acctParentOrg>and t.ACCT_PARENT_ORG = ?</acctParentOrg>
+      <belongTreasCd>and t.BELONG_TREAS_CD = ?</belongTreasCd>
+      <zoneCd>and t.ZONE_CD = ?</zoneCd>
+      <orgOrgCd>and t.ORG_ORG_CD = ?</orgOrgCd>
+      <orgLkman>and t.ORG_LKMAN = ?</orgLkman>
+      <bicCd>and t.BIC_CD = ?</bicCd>
+      <liqdCenterCd>and t.LIQD_CENTER_CD = ?</liqdCenterCd>
+      <paymentOrgNum>and t.PAYMENT_ORG_NUM = ?</paymentOrgNum>
+      <crspdDistRegionCd>and t.CRSPD_DIST_REGION_CD = ?</crspdDistRegionCd>
+      <chargeRegionCd>and t.CHARGE_REGION_CD = ?</chargeRegionCd>
+      <indvCrdtOrgCd>and t.INDV_CRDT_ORG_CD = ?</indvCrdtOrgCd>
+      <corpCrdtOrgCd>and t.CORP_CRDT_ORG_CD = ?</corpCrdtOrgCd>
+      <crdtSysZoneCd>and t.CRDT_SYS_ZONE_CD = ?</crdtSysZoneCd>
+      <invalidInd>and t.INVALID_IND = ?</invalidInd>
+      <smInd>and t.SM_IND = ?</smInd>
+      <openDt>and t.OPEN_DT = ?</openDt>
+      <etlTxDt>and t.ETL_TX_DT = ?</etlTxDt>
+      <dataSrcTableName>and t.DATA_SRC_TABLE_NAME = ?</dataSrcTableName>
+      <etlJobNum>and t.ETL_JOB_NUM = ?</etlJobNum>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

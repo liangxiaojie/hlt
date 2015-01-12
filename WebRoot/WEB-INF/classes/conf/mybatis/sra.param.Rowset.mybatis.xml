@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.param">
+  <insert id="insertRowset" parameterType="sra.param.vo.Rowset">
+     insert into T_DEF_ROWSET
+       (RS_CD,RS_NAME,RS_DESC,VCD01,VCD02,VCD03,VCD04,VCD05,VCD06,VCD07,VCD08,VCD09,VCD10,VCD11,VCD12,VCD13,VCD14,VCD15,DCD01,DCD02,DCD03,DCD04,DCD05,DCD06,DCD07,DCD08,DCD09,DCD10) values 
+       (#{rsCd},#{rsName},#{rsDesc},#{vcd01},#{vcd02},#{vcd03},#{vcd04},#{vcd05},#{vcd06},#{vcd07},#{vcd08},#{vcd09},#{vcd10},#{vcd11},#{vcd12},#{vcd13},#{vcd14},#{vcd15},#{dcd01},#{dcd02},#{dcd03},#{dcd04},#{dcd05},#{dcd06},#{dcd07},#{dcd08},#{dcd09},#{dcd10})
+  </insert>
+  <delete id="deleteRowset" parameterType="sra.param.vo.Rowset">
+     delete from T_DEF_ROWSET 
+       where RS_CD = #{rsCd} 
+  </delete>
+  <delete id="deleteRowsets" parameterType="Map">
+     delete from T_DEF_ROWSET where RS_CD in 
+          <foreach item="item" index="index" collection="rowsetIds" open="(" separator="," close=")" >
+				#{item}
+		  </foreach>
+  </delete>
+  <update id="updateRowset" parameterType="sra.param.vo.Rowset">
+     update T_DEF_ROWSET 
+       <set>
+       <if test="rsCd != null">RS_CD = #{rsCd},</if>
+       <if test="rsName != null">RS_NAME = #{rsName},</if>
+       <if test="rsDesc != null">RS_DESC = #{rsDesc},</if>
+       <if test="vcd01 != null">VCD01 = #{vcd01},</if>
+       <if test="vcd02 != null">VCD02 = #{vcd02},</if>
+       <if test="vcd03 != null">VCD03 = #{vcd03},</if>
+       <if test="vcd04 != null">VCD04 = #{vcd04},</if>
+       <if test="vcd05 != null">VCD05 = #{vcd05},</if>
+       <if test="vcd06 != null">VCD06 = #{vcd06},</if>
+       <if test="vcd07 != null">VCD07 = #{vcd07},</if>
+       <if test="vcd08 != null">VCD08 = #{vcd08},</if>
+       <if test="vcd09 != null">VCD09 = #{vcd09},</if>
+       <if test="vcd10 != null">VCD10 = #{vcd10},</if>
+       <if test="vcd11 != null">VCD11 = #{vcd11},</if>
+       <if test="vcd12 != null">VCD12 = #{vcd12},</if>
+       <if test="vcd13 != null">VCD13 = #{vcd13},</if>
+       <if test="vcd14 != null">VCD14 = #{vcd14},</if>
+       <if test="vcd15 != null">VCD15 = #{vcd15},</if>
+       <if test="dcd01 != null">DCD01 = #{dcd01},</if>
+       <if test="dcd02 != null">DCD02 = #{dcd02},</if>
+       <if test="dcd03 != null">DCD03 = #{dcd03},</if>
+       <if test="dcd04 != null">DCD04 = #{dcd04},</if>
+       <if test="dcd05 != null">DCD05 = #{dcd05},</if>
+       <if test="dcd06 != null">DCD06 = #{dcd06},</if>
+       <if test="dcd07 != null">DCD07 = #{dcd07},</if>
+       <if test="dcd08 != null">DCD08 = #{dcd08},</if>
+       <if test="dcd09 != null">DCD09 = #{dcd09},</if>
+       <if test="dcd10 != null">DCD10 = #{dcd10},</if>
+       </set>
+       where RS_CD = #{rsCd} 
+  </update>
+  <select id="loadRowset" resultType="sra.param.vo.Rowset" parameterType="sra.param.vo.Rowset">
+     select 
+       RS_CD as rsCd,
+       RS_NAME as rsName,
+       RS_DESC as rsDesc,
+       VCD01 as vcd01,
+       VCD02 as vcd02,
+       VCD03 as vcd03,
+       VCD04 as vcd04,
+       VCD05 as vcd05,
+       VCD06 as vcd06,
+       VCD07 as vcd07,
+       VCD08 as vcd08,
+       VCD09 as vcd09,
+       VCD10 as vcd10,
+       VCD11 as vcd11,
+       VCD12 as vcd12,
+       VCD13 as vcd13,
+       VCD14 as vcd14,
+       VCD15 as vcd15,
+       DCD01 as dcd01,
+       DCD02 as dcd02,
+       DCD03 as dcd03,
+       DCD04 as dcd04,
+       DCD05 as dcd05,
+       DCD06 as dcd06,
+       DCD07 as dcd07,
+       DCD08 as dcd08,
+       DCD09 as dcd09,
+       DCD10 as dcd10
+     from T_DEF_ROWSET 
+     where RS_CD = #{rsCd} 
+  </select>
+  <select id="queryRowsets" resultType="hashMap" parameterType="sra.param.vo.Rowset"  teradataOrderBy="RS_CD">
+     select 
+       RS_CD as rsCd,
+       RS_NAME as rsName,
+       RS_DESC as rsDesc,
+       VCD01 as vcd01,
+       VCD02 as vcd02,
+       VCD03 as vcd03,
+       VCD04 as vcd04,
+       VCD05 as vcd05,
+       VCD06 as vcd06,
+       VCD07 as vcd07,
+       VCD08 as vcd08,
+       VCD09 as vcd09,
+       VCD10 as vcd10,
+       VCD11 as vcd11,
+       VCD12 as vcd12,
+       VCD13 as vcd13,
+       VCD14 as vcd14,
+       VCD15 as vcd15,
+       DCD01 as dcd01,
+       DCD02 as dcd02,
+       DCD03 as dcd03,
+       DCD04 as dcd04,
+       DCD05 as dcd05,
+       DCD06 as dcd06,
+       DCD07 as dcd07,
+       DCD08 as dcd08,
+       DCD09 as dcd09,
+       DCD10 as dcd10
+     from T_DEF_ROWSET where 1=1 
+       <if test="rsCd != null"> 
+ and RS_CD = #{rsCd} 
+ </if>
+       <if test="rsName != null"> 
+ and RS_NAME = #{rsName} 
+ </if>
+       <if test="rsDesc != null"> 
+ and RS_DESC = #{rsDesc} 
+ </if>
+       <if test="vcd01 != null"> 
+ and VCD01 = #{vcd01} 
+ </if>
+       <if test="vcd02 != null"> 
+ and VCD02 = #{vcd02} 
+ </if>
+       <if test="vcd03 != null"> 
+ and VCD03 = #{vcd03} 
+ </if>
+       <if test="vcd04 != null"> 
+ and VCD04 = #{vcd04} 
+ </if>
+       <if test="vcd05 != null"> 
+ and VCD05 = #{vcd05} 
+ </if>
+       <if test="vcd06 != null"> 
+ and VCD06 = #{vcd06} 
+ </if>
+       <if test="vcd07 != null"> 
+ and VCD07 = #{vcd07} 
+ </if>
+       <if test="vcd08 != null"> 
+ and VCD08 = #{vcd08} 
+ </if>
+       <if test="vcd09 != null"> 
+ and VCD09 = #{vcd09} 
+ </if>
+       <if test="vcd10 != null"> 
+ and VCD10 = #{vcd10} 
+ </if>
+       <if test="vcd11 != null"> 
+ and VCD11 = #{vcd11} 
+ </if>
+       <if test="vcd12 != null"> 
+ and VCD12 = #{vcd12} 
+ </if>
+       <if test="vcd13 != null"> 
+ and VCD13 = #{vcd13} 
+ </if>
+       <if test="vcd14 != null"> 
+ and VCD14 = #{vcd14} 
+ </if>
+       <if test="vcd15 != null"> 
+ and VCD15 = #{vcd15} 
+ </if>
+       <if test="dcd01 != null"> 
+ and DCD01 = #{dcd01} 
+ </if>
+       <if test="dcd02 != null"> 
+ and DCD02 = #{dcd02} 
+ </if>
+       <if test="dcd03 != null"> 
+ and DCD03 = #{dcd03} 
+ </if>
+       <if test="dcd04 != null"> 
+ and DCD04 = #{dcd04} 
+ </if>
+       <if test="dcd05 != null"> 
+ and DCD05 = #{dcd05} 
+ </if>
+       <if test="dcd06 != null"> 
+ and DCD06 = #{dcd06} 
+ </if>
+       <if test="dcd07 != null"> 
+ and DCD07 = #{dcd07} 
+ </if>
+       <if test="dcd08 != null"> 
+ and DCD08 = #{dcd08} 
+ </if>
+       <if test="dcd09 != null"> 
+ and DCD09 = #{dcd09} 
+ </if>
+       <if test="dcd10 != null"> 
+ and DCD10 = #{dcd10} 
+ </if>
+  </select>
+  <select id="queryRowsetTotal" resultType="hashMap" parameterType="sra.param.vo.Rowset">
+     select count(1) cnt 
+     from T_DEF_ROWSET where 1=1 
+       <if test="rsCd != null"> 
+ and RS_CD = #{rsCd} 
+ </if>
+       <if test="rsName != null"> 
+ and RS_NAME = #{rsName} 
+ </if>
+       <if test="rsDesc != null"> 
+ and RS_DESC = #{rsDesc} 
+ </if>
+       <if test="vcd01 != null"> 
+ and VCD01 = #{vcd01} 
+ </if>
+       <if test="vcd02 != null"> 
+ and VCD02 = #{vcd02} 
+ </if>
+       <if test="vcd03 != null"> 
+ and VCD03 = #{vcd03} 
+ </if>
+       <if test="vcd04 != null"> 
+ and VCD04 = #{vcd04} 
+ </if>
+       <if test="vcd05 != null"> 
+ and VCD05 = #{vcd05} 
+ </if>
+       <if test="vcd06 != null"> 
+ and VCD06 = #{vcd06} 
+ </if>
+       <if test="vcd07 != null"> 
+ and VCD07 = #{vcd07} 
+ </if>
+       <if test="vcd08 != null"> 
+ and VCD08 = #{vcd08} 
+ </if>
+       <if test="vcd09 != null"> 
+ and VCD09 = #{vcd09} 
+ </if>
+       <if test="vcd10 != null"> 
+ and VCD10 = #{vcd10} 
+ </if>
+       <if test="vcd11 != null"> 
+ and VCD11 = #{vcd11} 
+ </if>
+       <if test="vcd12 != null"> 
+ and VCD12 = #{vcd12} 
+ </if>
+       <if test="vcd13 != null"> 
+ and VCD13 = #{vcd13} 
+ </if>
+       <if test="vcd14 != null"> 
+ and VCD14 = #{vcd14} 
+ </if>
+       <if test="vcd15 != null"> 
+ and VCD15 = #{vcd15} 
+ </if>
+       <if test="dcd01 != null"> 
+ and DCD01 = #{dcd01} 
+ </if>
+       <if test="dcd02 != null"> 
+ and DCD02 = #{dcd02} 
+ </if>
+       <if test="dcd03 != null"> 
+ and DCD03 = #{dcd03} 
+ </if>
+       <if test="dcd04 != null"> 
+ and DCD04 = #{dcd04} 
+ </if>
+       <if test="dcd05 != null"> 
+ and DCD05 = #{dcd05} 
+ </if>
+       <if test="dcd06 != null"> 
+ and DCD06 = #{dcd06} 
+ </if>
+       <if test="dcd07 != null"> 
+ and DCD07 = #{dcd07} 
+ </if>
+       <if test="dcd08 != null"> 
+ and DCD08 = #{dcd08} 
+ </if>
+       <if test="dcd09 != null"> 
+ and DCD09 = #{dcd09} 
+ </if>
+       <if test="dcd10 != null"> 
+ and DCD10 = #{dcd10} 
+ </if>
+  </select>
+</mapper>

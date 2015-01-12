@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.urm">
+  <insert id="insertMtable" parameterType="sra.urm.vo.Mtable">
+     insert into T_SYS_MTABLE
+       (PK1,PK2,FT_VARCHAR,FT_DATE,FT_DEC,FT_INT,FT_CS) values 
+       (#{pk1},#{pk2},#{ftVarchar},#{ftDate},#{ftDec},#{ftInt},#{ftCs})
+  </insert>
+  <delete id="deleteMtable" parameterType="sra.urm.vo.Mtable">
+     delete from T_SYS_MTABLE 
+       where PK1 = #{pk1} 
+          and PK2 = #{pk2} 
+  </delete>
+  <update id="updateMtable" parameterType="sra.urm.vo.Mtable">
+     update T_SYS_MTABLE 
+       <set>
+       <if test="pk1 != null">PK1 = #{pk1},</if>
+       <if test="pk2 != null">PK2 = #{pk2},</if>
+       <if test="ftVarchar != null">FT_VARCHAR = #{ftVarchar},</if>
+       <if test="ftDate != null">FT_DATE = #{ftDate},</if>
+       <if test="ftDec != null">FT_DEC = #{ftDec},</if>
+       <if test="ftInt != null">FT_INT = #{ftInt},</if>
+       <if test="ftCs != null">FT_CS = #{ftCs},</if>
+       </set>
+       where PK1 = #{pk1} 
+          and PK2 = #{pk2} 
+  </update>
+  <select id="loadMtable" resultType="sra.urm.vo.Mtable" parameterType="sra.urm.vo.Mtable">
+     select 
+       PK1 as pk1,
+       PK2 as pk2,
+       FT_VARCHAR as ftVarchar,
+       FT_DATE as ftDate,
+       FT_DEC as ftDec,
+       FT_INT as ftInt,
+       FT_CS as ftCs
+     from T_SYS_MTABLE 
+     where PK1 = #{pk1} 
+        and PK2 = #{pk2} 
+  </select>
+</mapper>

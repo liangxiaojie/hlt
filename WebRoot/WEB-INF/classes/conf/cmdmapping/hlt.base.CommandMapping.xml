@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="gb2312"?>
+<CommandMapping>
+
+  <!--comm.begin-->
+  <module name="comm">
+   <!--  <mapping path="/ds_range.do"  	command="dds.param.web.DsRangeMCommand" />  -->
+  </module>  
+  
+</CommandMapping>

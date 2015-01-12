@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.param">
+  <insert id="insertCmbcOrg" parameterType="sra.param.vo.CmbcOrg">
+     insert into T_SYS_CMBC_ORG
+       (ORG_NUM,MANAGE_PARENT_ORG,ORG_FULL_NAME,ORG_NAME,ORG_LEVEL,COUNTRY_AREA_CD,ORG_ADDR,ORG_ZIP_CD,ORG_TEL,ACCT_PARENT_ORG,BELONG_TREAS_CD,ZONE_CD,ORG_ORG_CD,ORG_LKMAN,BIC_CD,LIQD_CENTER_CD,PAYMENT_ORG_NUM,CRSPD_DIST_REGION_CD,CHARGE_REGION_CD,INDV_CRDT_ORG_CD,CORP_CRDT_ORG_CD,CRDT_SYS_ZONE_CD,INVALID_IND,SM_IND,OPEN_DT,ETL_TX_DT,DATA_SRC_TABLE_NAME,ETL_JOB_NUM) values 
+       (#{orgNum},#{manageParentOrg},#{orgFullName},#{orgName},#{orgLevel},#{countryAreaCd},#{orgAddr},#{orgZipCd},#{orgTel},#{acctParentOrg},#{belongTreasCd},#{zoneCd},#{orgOrgCd},#{orgLkman},#{bicCd},#{liqdCenterCd},#{paymentOrgNum},#{crspdDistRegionCd},#{chargeRegionCd},#{indvCrdtOrgCd},#{corpCrdtOrgCd},#{crdtSysZoneCd},#{invalidInd},#{smInd},#{openDt},#{etlTxDt},#{dataSrcTableName},#{etlJobNum})
+  </insert>
+  <delete id="deleteCmbcOrg" parameterType="sra.param.vo.CmbcOrg">
+     delete from T_SYS_CMBC_ORG 
+       where ORG_NUM = #{orgNum} 
+  </delete>
+  <delete id="deleteCmbcOrgs" parameterType="Map">
+     delete from T_SYS_CMBC_ORG where ORG_NUM in 
+          <foreach item="item" index="index" collection="cmbcOrgIds" open="(" separator="," close=")" >
+				#{item}
+		  </foreach>
+  </delete>
+  <update id="updateCmbcOrg" parameterType="sra.param.vo.CmbcOrg">
+     update T_SYS_CMBC_ORG 
+       <set>
+       <if test="orgNum != null">ORG_NUM = #{orgNum},</if>
+       <if test="manageParentOrg != null">MANAGE_PARENT_ORG = #{manageParentOrg},</if>
+       <if test="orgFullName != null">ORG_FULL_NAME = #{orgFullName},</if>
+       <if test="orgName != null">ORG_NAME = #{orgName},</if>
+       <if test="orgLevel != null">ORG_LEVEL = #{orgLevel},</if>
+       <if test="countryAreaCd != null">COUNTRY_AREA_CD = #{countryAreaCd},</if>
+       <if test="orgAddr != null">ORG_ADDR = #{orgAddr},</if>
+       <if test="orgZipCd != null">ORG_ZIP_CD = #{orgZipCd},</if>
+       <if test="orgTel != null">ORG_TEL = #{orgTel},</if>
+       <if test="acctParentOrg != null">ACCT_PARENT_ORG = #{acctParentOrg},</if>
+       <if test="belongTreasCd != null">BELONG_TREAS_CD = #{belongTreasCd},</if>
+       <if test="zoneCd != null">ZONE_CD = #{zoneCd},</if>
+       <if test="orgOrgCd != null">ORG_ORG_CD = #{orgOrgCd},</if>
+       <if test="orgLkman != null">ORG_LKMAN = #{orgLkman},</if>
+       <if test="bicCd != null">BIC_CD = #{bicCd},</if>
+       <if test="liqdCenterCd != null">LIQD_CENTER_CD = #{liqdCenterCd},</if>
+       <if test="paymentOrgNum != null">PAYMENT_ORG_NUM = #{paymentOrgNum},</if>
+       <if test="crspdDistRegionCd != null">CRSPD_DIST_REGION_CD = #{crspdDistRegionCd},</if>
+       <if test="chargeRegionCd != null">CHARGE_REGION_CD = #{chargeRegionCd},</if>
+       <if test="indvCrdtOrgCd != null">INDV_CRDT_ORG_CD = #{indvCrdtOrgCd},</if>
+       <if test="corpCrdtOrgCd != null">CORP_CRDT_ORG_CD = #{corpCrdtOrgCd},</if>
+       <if test="crdtSysZoneCd != null">CRDT_SYS_ZONE_CD = #{crdtSysZoneCd},</if>
+       <if test="invalidInd != null">INVALID_IND = #{invalidInd},</if>
+       <if test="smInd != null">SM_IND = #{smInd},</if>
+       <if test="openDt != null">OPEN_DT = #{openDt},</if>
+       <if test="etlTxDt != null">ETL_TX_DT = #{etlTxDt},</if>
+       <if test="dataSrcTableName != null">DATA_SRC_TABLE_NAME = #{dataSrcTableName},</if>
+       <if test="etlJobNum != null">ETL_JOB_NUM = #{etlJobNum},</if>
+       </set>
+       where ORG_NUM = #{orgNum} 
+  </update>
+  <select id="loadCmbcOrg" resultType="sra.param.vo.CmbcOrg" parameterType="sra.param.vo.CmbcOrg">
+     select 
+       ORG_NUM as orgNum,
+       MANAGE_PARENT_ORG as manageParentOrg,
+       ORG_FULL_NAME as orgFullName,
+       ORG_NAME as orgName,
+       ORG_LEVEL as orgLevel,
+       COUNTRY_AREA_CD as countryAreaCd,
+       ORG_ADDR as orgAddr,
+       ORG_ZIP_CD as orgZipCd,
+       ORG_TEL as orgTel,
+       ACCT_PARENT_ORG as acctParentOrg,
+       BELONG_TREAS_CD as belongTreasCd,
+       ZONE_CD as zoneCd,
+       ORG_ORG_CD as orgOrgCd,
+       ORG_LKMAN as orgLkman,
+       BIC_CD as bicCd,
+       LIQD_CENTER_CD as liqdCenterCd,
+       PAYMENT_ORG_NUM as paymentOrgNum,
+       CRSPD_DIST_REGION_CD as crspdDistRegionCd,
+       CHARGE_REGION_CD as chargeRegionCd,
+       INDV_CRDT_ORG_CD as indvCrdtOrgCd,
+       CORP_CRDT_ORG_CD as corpCrdtOrgCd,
+       CRDT_SYS_ZONE_CD as crdtSysZoneCd,
+       INVALID_IND as invalidInd,
+       SM_IND as smInd,
+       OPEN_DT as openDt,
+       ETL_TX_DT as etlTxDt,
+       DATA_SRC_TABLE_NAME as dataSrcTableName,
+       ETL_JOB_NUM as etlJobNum
+     from T_SYS_CMBC_ORG 
+     where ORG_NUM = #{orgNum} 
+  </select>
+  <select id="queryCmbcOrgs" resultType="hashMap" parameterType="sra.param.vo.CmbcOrg"  teradataOrderBy="ORG_NUM">
+     select 
+       ORG_NUM as orgNum,
+       MANAGE_PARENT_ORG as manageParentOrg,
+       ORG_FULL_NAME as orgFullName,
+       ORG_NAME as orgName,
+       ORG_LEVEL as orgLevel,
+       COUNTRY_AREA_CD as countryAreaCd,
+       ORG_ADDR as orgAddr,
+       ORG_ZIP_CD as orgZipCd,
+       ORG_TEL as orgTel,
+       ACCT_PARENT_ORG as acctParentOrg,
+       BELONG_TREAS_CD as belongTreasCd,
+       ZONE_CD as zoneCd,
+       ORG_ORG_CD as orgOrgCd,
+       ORG_LKMAN as orgLkman,
+       BIC_CD as bicCd,
+       LIQD_CENTER_CD as liqdCenterCd,
+       PAYMENT_ORG_NUM as paymentOrgNum,
+       CRSPD_DIST_REGION_CD as crspdDistRegionCd,
+       CHARGE_REGION_CD as chargeRegionCd,
+       INDV_CRDT_ORG_CD as indvCrdtOrgCd,
+       CORP_CRDT_ORG_CD as corpCrdtOrgCd,
+       CRDT_SYS_ZONE_CD as crdtSysZoneCd,
+       INVALID_IND as invalidInd,
+       SM_IND as smInd,
+       OPEN_DT as openDt,
+       ETL_TX_DT as etlTxDt,
+       DATA_SRC_TABLE_NAME as dataSrcTableName,
+       ETL_JOB_NUM as etlJobNum
+     from T_SYS_CMBC_ORG where 1=1 
+       <if test="orgNum != null"> 
+ and ORG_NUM = #{orgNum} 
+ </if>
+       <if test="manageParentOrg != null"> 
+ and MANAGE_PARENT_ORG = #{manageParentOrg} 
+ </if>
+       <if test="orgFullName != null"> 
+ and ORG_FULL_NAME = #{orgFullName} 
+ </if>
+       <if test="orgName != null"> 
+ and ORG_NAME = #{orgName} 
+ </if>
+       <if test="orgLevel != null"> 
+ and ORG_LEVEL = #{orgLevel} 
+ </if>
+       <if test="countryAreaCd != null"> 
+ and COUNTRY_AREA_CD = #{countryAreaCd} 
+ </if>
+       <if test="orgAddr != null"> 
+ and ORG_ADDR = #{orgAddr} 
+ </if>
+       <if test="orgZipCd != null"> 
+ and ORG_ZIP_CD = #{orgZipCd} 
+ </if>
+       <if test="orgTel != null"> 
+ and ORG_TEL = #{orgTel} 
+ </if>
+       <if test="acctParentOrg != null"> 
+ and ACCT_PARENT_ORG = #{acctParentOrg} 
+ </if>
+       <if test="belongTreasCd != null"> 
+ and BELONG_TREAS_CD = #{belongTreasCd} 
+ </if>
+       <if test="zoneCd != null"> 
+ and ZONE_CD = #{zoneCd} 
+ </if>
+       <if test="orgOrgCd != null"> 
+ and ORG_ORG_CD = #{orgOrgCd} 
+ </if>
+       <if test="orgLkman != null"> 
+ and ORG_LKMAN = #{orgLkman} 
+ </if>
+       <if test="bicCd != null"> 
+ and BIC_CD = #{bicCd} 
+ </if>
+       <if test="liqdCenterCd != null"> 
+ and LIQD_CENTER_CD = #{liqdCenterCd} 
+ </if>
+       <if test="paymentOrgNum != null"> 
+ and PAYMENT_ORG_NUM = #{paymentOrgNum} 
+ </if>
+       <if test="crspdDistRegionCd != null"> 
+ and CRSPD_DIST_REGION_CD = #{crspdDistRegionCd} 
+ </if>
+       <if test="chargeRegionCd != null"> 
+ and CHARGE_REGION_CD = #{chargeRegionCd} 
+ </if>
+       <if test="indvCrdtOrgCd != null"> 
+ and INDV_CRDT_ORG_CD = #{indvCrdtOrgCd} 
+ </if>
+       <if test="corpCrdtOrgCd != null"> 
+ and CORP_CRDT_ORG_CD = #{corpCrdtOrgCd} 
+ </if>
+       <if test="crdtSysZoneCd != null"> 
+ and CRDT_SYS_ZONE_CD = #{crdtSysZoneCd} 
+ </if>
+       <if test="invalidInd != null"> 
+ and INVALID_IND = #{invalidInd} 
+ </if>
+       <if test="smInd != null"> 
+ and SM_IND = #{smInd} 
+ </if>
+       <if test="openDt != null"> 
+ and OPEN_DT = #{openDt} 
+ </if>
+       <if test="etlTxDt != null"> 
+ and ETL_TX_DT = #{etlTxDt} 
+ </if>
+       <if test="dataSrcTableName != null"> 
+ and DATA_SRC_TABLE_NAME = #{dataSrcTableName} 
+ </if>
+       <if test="etlJobNum != null"> 
+ and ETL_JOB_NUM = #{etlJobNum} 
+ </if>
+  </select>
+  <select id="queryCmbcOrgTotal" resultType="hashMap" parameterType="sra.param.vo.CmbcOrg">
+     select count(1) cnt 
+     from T_SYS_CMBC_ORG where 1=1 
+       <if test="orgNum != null"> 
+ and ORG_NUM = #{orgNum} 
+ </if>
+       <if test="manageParentOrg != null"> 
+ and MANAGE_PARENT_ORG = #{manageParentOrg} 
+ </if>
+       <if test="orgFullName != null"> 
+ and ORG_FULL_NAME = #{orgFullName} 
+ </if>
+       <if test="orgName != null"> 
+ and ORG_NAME = #{orgName} 
+ </if>
+       <if test="orgLevel != null"> 
+ and ORG_LEVEL = #{orgLevel} 
+ </if>
+       <if test="countryAreaCd != null"> 
+ and COUNTRY_AREA_CD = #{countryAreaCd} 
+ </if>
+       <if test="orgAddr != null"> 
+ and ORG_ADDR = #{orgAddr} 
+ </if>
+       <if test="orgZipCd != null"> 
+ and ORG_ZIP_CD = #{orgZipCd} 
+ </if>
+       <if test="orgTel != null"> 
+ and ORG_TEL = #{orgTel} 
+ </if>
+       <if test="acctParentOrg != null"> 
+ and ACCT_PARENT_ORG = #{acctParentOrg} 
+ </if>
+       <if test="belongTreasCd != null"> 
+ and BELONG_TREAS_CD = #{belongTreasCd} 
+ </if>
+       <if test="zoneCd != null"> 
+ and ZONE_CD = #{zoneCd} 
+ </if>
+       <if test="orgOrgCd != null"> 
+ and ORG_ORG_CD = #{orgOrgCd} 
+ </if>
+       <if test="orgLkman != null"> 
+ and ORG_LKMAN = #{orgLkman} 
+ </if>
+       <if test="bicCd != null"> 
+ and BIC_CD = #{bicCd} 
+ </if>
+       <if test="liqdCenterCd != null"> 
+ and LIQD_CENTER_CD = #{liqdCenterCd} 
+ </if>
+       <if test="paymentOrgNum != null"> 
+ and PAYMENT_ORG_NUM = #{paymentOrgNum} 
+ </if>
+       <if test="crspdDistRegionCd != null"> 
+ and CRSPD_DIST_REGION_CD = #{crspdDistRegionCd} 
+ </if>
+       <if test="chargeRegionCd != null"> 
+ and CHARGE_REGION_CD = #{chargeRegionCd} 
+ </if>
+       <if test="indvCrdtOrgCd != null"> 
+ and INDV_CRDT_ORG_CD = #{indvCrdtOrgCd} 
+ </if>
+       <if test="corpCrdtOrgCd != null"> 
+ and CORP_CRDT_ORG_CD = #{corpCrdtOrgCd} 
+ </if>
+       <if test="crdtSysZoneCd != null"> 
+ and CRDT_SYS_ZONE_CD = #{crdtSysZoneCd} 
+ </if>
+       <if test="invalidInd != null"> 
+ and INVALID_IND = #{invalidInd} 
+ </if>
+       <if test="smInd != null"> 
+ and SM_IND = #{smInd} 
+ </if>
+       <if test="openDt != null"> 
+ and OPEN_DT = #{openDt} 
+ </if>
+       <if test="etlTxDt != null"> 
+ and ETL_TX_DT = #{etlTxDt} 
+ </if>
+       <if test="dataSrcTableName != null"> 
+ and DATA_SRC_TABLE_NAME = #{dataSrcTableName} 
+ </if>
+       <if test="etlJobNum != null"> 
+ and ETL_JOB_NUM = #{etlJobNum} 
+ </if>
+  </select>
+</mapper>

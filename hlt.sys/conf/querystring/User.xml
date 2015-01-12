@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryUser">
+    <SELECT><![CDATA[
+      SELECT
+        t.USER_ID as userId,
+        t.USER_PWD as userPwd,
+        t.USER_NAME as userName,
+        t.USER_ORG as userOrg
+      from T_URM_USER t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <userId>and t.USER_ID = ?</userId>
+      <userPwd>and t.USER_PWD = ?</userPwd>
+      <userName>and t.USER_NAME = ?</userName>
+      <userOrg>and t.USER_ORG = ?</userOrg>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.urm">
+  <insert id="insertRoleMenu" parameterType="sra.urm.vo.RoleMenu">
+     insert into T_URM_ROLE_MENU
+       (ROLE_CODE,MENU_CODE) values 
+       (#{roleCode},#{menuCode})
+  </insert>
+  <insert id="addMenuOfRole" parameterType="sra.urm.vo.RoleMenu">
+     	insert into [T_URM_ROLE_MENU]([ROLE_CODE],[MENU_CODE]) VALUES (#{roleCode,jdbcType=VARCHAR},#{menuCode,jdbcType=VARCHAR})
+  </insert>
+  <delete id="deleteRoleMenu" parameterType="sra.urm.vo.RoleMenu">
+     delete from T_URM_ROLE_MENU 
+       where ROLE_CODE = #{roleCode} 
+          and MENU_CODE = #{menuCode} 
+  </delete>
+  <delete id="deleteMenuOfRole" parameterType="Map">
+		delete from [T_URM_ROLE_MENU] where [ROLE_CODE] in 
+		<foreach item="item" index="index" collection="roleCodes" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+  <update id="updateRoleMenu" parameterType="sra.urm.vo.RoleMenu">
+     update T_URM_ROLE_MENU 
+       <set>
+       <if test="roleCode != null">ROLE_CODE = #{roleCode},</if>
+       <if test="menuCode != null">MENU_CODE = #{menuCode},</if>
+       </set>
+       where ROLE_CODE = #{roleCode} 
+          and MENU_CODE = #{menuCode} 
+  </update>
+  <select id="loadRoleMenu" resultType="sra.urm.vo.RoleMenu" parameterType="sra.urm.vo.RoleMenu">
+     select 
+       ROLE_CODE as roleCode,
+       MENU_CODE as menuCode
+     from T_URM_ROLE_MENU 
+     where ROLE_CODE = #{roleCode} 
+        and MENU_CODE = #{menuCode} 
+  </select>
+  <select id="queryRoleNoMenus" parameterType="Map" resultType="sra.urm.vo.Menu" flushCache="false" useCache="false" teradataOrderBy="menu_code">
+		select [MENU_CODE] as "menuCode",
+		[MENU_NAME] as "menuName",
+		[MENU_URL] as "menuUrl",
+		[PARENT_CODE] as "parentCode",
+		[MENU_ORDER] as "menuOrder",
+		[EXT_CONFIG] as "extConfig",
+		[MENU_DESC] as "menuDesc" 
+		FROM [T_URM_MENU] WHERE MENU_CODE NOT IN(SELECT MENU_CODE FROM T_URM_ROLE_MENU WHERE 1=1
+		<if test="roleCode!=null">
+			and [ROLE_CODE]=#{roleCode}
+		</if>
+		)
+	</select>
+	<select id="queryRoleAndMenus" parameterType="Map" resultType="sra.urm.vo.Menu" flushCache="false" useCache="false" teradataOrderBy="role_code">
+		select [MENU_CODE] as "menuCode",
+		[MENU_NAME] as "menuName",
+		[MENU_URL] as "menuUrl",
+		[PARENT_CODE] as "parentCode",
+		[MENU_ORDER] as "menuOrder",
+		[EXT_CONFIG] as "extConfig",
+		[MENU_DESC] as "menuDesc" 
+		FROM [T_URM_MENU] WHERE MENU_CODE IN(SELECT MENU_CODE FROM T_URM_ROLE_MENU WHERE 1=1
+		<if test="roleCode!=null">
+			and [ROLE_CODE]=#{roleCode}
+		</if>
+		)
+	</select>
+</mapper>

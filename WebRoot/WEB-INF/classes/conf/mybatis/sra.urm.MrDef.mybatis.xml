@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.param">
+  <insert id="insertMrDef" parameterType="map">
+     insert into T_URM_MR_DEF
+       (MODULE_NUM,RIGHT_CODE,MODULE_NAME,MODULE_LABEL,RIGHT_DESC) values 
+       (#{moduleNum},#{rightCode},#{moduleName},#{moduleLabel},#{rightDesc})
+  </insert>
+  <delete id="deleteMrDef" parameterType="map">
+     delete from T_URM_MR_DEF where MODULE_NUM = #{moduleNum}    and RIGHT_CODE = #{rightCode} 
+  </delete>
+  <update id="updateMrDef" parameterType="map">
+     update T_URM_MR_DEF 
+       <set>
+       <if test="moduleName != null">MODULE_NAME = #{moduleName},</if>
+       <if test="moduleLabel != null">MODULE_LABEL = #{moduleLabel},</if>
+       <if test="rightDesc != null">RIGHT_DESC = #{rightDesc},</if>
+       </set>
+       where MODULE_NUM = #{moduleNum} 
+          and RIGHT_CODE = #{rightCode} 
+  </update>
+  <select id="loadMrDef" resultType="map" parameterType="map">
+     select 
+       MODULE_NUM as moduleNum,
+       RIGHT_CODE as rightCode,
+       MODULE_NAME as moduleName,
+       MODULE_LABEL as moduleLabel,
+       RIGHT_DESC as rightDesc
+     from T_URM_MR_DEF 
+     where MODULE_NUM = #{moduleNum} 
+        and RIGHT_CODE = #{rightCode} 
+  </select>
+  <select id="queryMrDef" resultType="map" parameterType="map"  teradataOrderBy="MODULE_NUM">
+     select 
+       MODULE_NUM as moduleNum,
+       RIGHT_CODE as rightCode,
+       MODULE_NAME as moduleName,
+       MODULE_LABEL as moduleLabel,
+       RIGHT_DESC as rightDesc
+     from T_URM_MR_DEF where 1=1 
+       <if test="moduleNum != null">and MODULE_NUM = #{moduleNum}</if>
+       <if test="rightCode != null">and RIGHT_CODE = #{rightCode}</if>
+       <if test="moduleName != null">and MODULE_NAME = #{moduleName}</if>
+       <if test="moduleLabel != null">and MODULE_LABEL = #{moduleLabel}</if>
+       <if test="rightDesc != null">and RIGHT_DESC = #{rightDesc}</if>
+  </select>
+  <select id="queryMrDefTotal" resultType="map" parameterType="map">
+     select count(1) cnt 
+     from T_URM_MR_DEF where 1=1 
+       <if test="moduleNum != null">and MODULE_NUM = #{moduleNum}</if>
+       <if test="rightCode != null">and RIGHT_CODE = #{rightCode}</if>
+       <if test="moduleName != null">and MODULE_NAME = #{moduleName}</if>
+       <if test="moduleLabel != null">and MODULE_LABEL = #{moduleLabel}</if>
+       <if test="rightDesc != null">and RIGHT_DESC = #{rightDesc}</if>
+  </select>
+  <select id="queryModuleNum4List" resultType="map" parameterType="map">
+  	  select distinct Module_num as moduleNum ,module_name as moduleName from T_URM_MR_DEF
+  </select>
+    <select id="queryModuleRight4List" resultType="map" parameterType="map">
+  	    	 select distinct  def.RIGHT_CODE as rightCode,def.RIGHT_DESC as rightDesc,
+			case when ri.user_id=#{userId} then
+  		'true'
+ 			 else
+  		'false'
+  		end as baohan
+  		from T_URM_MR_DEF def left join 
+ 		T_URM_MR_RIGHT ri on def.MODULE_NUM=ri.MODULE_NUM and ri.RIGHT_CODE=def.RIGHT_CODE and ri.USER_ID=#{userId}
+ 		where def.MODULE_NUM=#{moduleNum}
+  </select>
+  <select id="queryModuleOrg4List" resultType="map" parameterType="map">
+  select USER_ID as uerId,module_num as moduleNum,mr_org as mrOrg from T_URM_MR_ORG where USER_ID=#{userId} and module_num=#{moduleNum}
+  </select>
+</mapper>

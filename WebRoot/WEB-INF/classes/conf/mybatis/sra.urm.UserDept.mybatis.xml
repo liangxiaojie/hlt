@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.urm">
+  <insert id="insertDeptUser" parameterType="sra.urm.vo.DeptUser">
+     insert into T_URM_DEPT_USER
+       (DEPT_ID,USER_ID,IS_MANAGER) values 
+       (#{deptId},#{userId},#{isManager})
+  </insert>
+  <delete id="deleteDeptUser" parameterType="sra.urm.vo.DeptUser">
+     delete from T_URM_DEPT_USER 
+       where DEPT_ID = #{deptId} 
+          and USER_ID = #{userId} 
+  </delete>
+  <delete id="deleteDeptUsers" parameterType="Map">
+     delete from T_URM_DEPT_USER where DEPT_ID in 
+          <foreach item="item" index="index" collection="deptIds" open="(" separator="," close=")" >
+				#{item}
+		  </foreach>
+  </delete>
+  <delete id="deleteDeptOfUser" parameterType="Map">
+		delete from [T_URM_DEPT_USER] where [USER_ID] in 
+		<foreach item="item" index="index" collection="userIds" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<delete id="deleteUserOfDept" parameterType="Map">
+		delete from [T_URM_DEPT_USER] where 1=1 
+		<if test="deptId != null"> 
+		 and DEPT_ID = #{deptId} 
+		 </if>
+		 and [USER_ID] in 
+		<foreach item="item" index="index" collection="userIds" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<!-- 将用户的所属部门改为新的部门 -->
+	<update id="updateDeptId" parameterType="map">
+     update T_URM_DEPT_USER 
+       <set> 
+       	DEPT_ID = #{deptId},IS_MANAGER = 'N'
+       </set>
+       where DEPT_ID = #{oldDeptId} and USER_ID = #{userId} 
+  </update>
+  
+  <update id="updateDeptUser" parameterType="sra.urm.vo.DeptUser">
+     update T_URM_DEPT_USER 
+       <set>
+       <if test="deptId != null">DEPT_ID = #{deptId},</if>
+       <if test="userId != null">USER_ID = #{userId},</if>
+       <if test="isManager != null">IS_MANAGER = #{isManager},</if>
+       </set>
+       where DEPT_ID = #{deptId} 
+          and USER_ID = #{userId} 
+  </update>
+  <!-- 将此部门下所有人员修改为不是管理员 -->
+  <update id="updateAllInN" parameterType="map">
+     update T_URM_DEPT_USER 
+       <set>
+       IS_MANAGER = 'N'
+       </set>
+       where DEPT_ID = #{deptId} 
+  </update>
+    <!-- 将此部门选中的人员修改成管理员 -->
+  <update id="updateAllInY" parameterType="map">
+     update T_URM_DEPT_USER 
+       <set>
+       IS_MANAGER = 'Y'
+       </set>
+       where DEPT_ID = #{deptId} AND USER_ID = #{userId} 
+  </update>
+  
+  <select id="loadDeptUser" resultType="sra.urm.vo.DeptUser" parameterType="sra.urm.vo.DeptUser">
+     select 
+       DEPT_ID as deptId,
+       USER_ID as userId,
+       IS_MANAGER as isManager
+     from T_URM_DEPT_USER 
+     where DEPT_ID = #{deptId} 
+        and USER_ID = #{userId} 
+  </select>
+  <select id="queryUserNoDepts" parameterType="Map" resultType="sra.urm.vo.Dept" flushCache="false" useCache="false" teradataOrderBy="DEPT_ID">
+	SELECT DEPT_ID as deptId,
+	DEPT_NAME as deptName,
+	PARENT_DEPT as parentDept,
+	DEPT_DESC as deptDesc
+	FROM T_URM_DEPT WHERE DEPT_ID NOT IN(SELECT DEPT_ID FROM T_URM_DEPT_USER WHERE 1=1
+		<if test="userId!=null">
+			and [USER_ID]=#{userId}
+		</if>
+		)
+	</select>
+	<select id="queryDeptUsers" resultType="hashMap" parameterType="sra.urm.vo.DeptUser"  teradataOrderBy="DEPT_ID">
+	     select 
+	       DEPT_ID as deptId,
+	       USER_ID as userId,
+	       IS_MANAGER as isManager
+	    from T_URM_DEPT_USER where 1=1 
+       	 <if test="deptId != null"> 
+		 and DEPT_ID = #{deptId} 
+		 </if>
+		       <if test="userId != null"> 
+		 and USER_ID = #{userId} 
+		 </if>
+		       <if test="isManager != null"> 
+		 and IS_MANAGER = #{isManager} 
+		 </if>
+  	</select>
+  	<select id="queryDeptIdByUserIds" parameterType="Map" resultType="Map">
+		SELECT DEPT_ID as deptId
+		FROM T_URM_DEPT_USER  WHERE USER_ID in 
+     	<foreach item="item" index="index" collection="userIds" open="(" separator="," close=")" >
+			#{item}
+		</foreach>
+	</select>
+	
+	<select id="queryUserAndDepts" parameterType="Map" resultType="sra.urm.vo.Dept" flushCache="false" useCache="false" teradataOrderBy="DEPT_ID">
+		SELECT DEPT_ID as deptId,
+		DEPT_NAME as deptName,
+		PARENT_DEPT as parentDept,
+		DEPT_DESC as deptDesc
+		FROM T_URM_DEPT WHERE DEPT_ID IN(SELECT DEPT_ID FROM T_URM_DEPT_USER WHERE 1=1
+			<if test="userId!=null">
+				and [USER_ID]=#{userId}
+			</if>
+			)
+	</select>
+		<select id="queryUserDepts" parameterType="Map" resultType="sra.urm.vo.Dept" flushCache="false" useCache="false" teradataOrderBy="DEPT_ID">
+		SELECT DEPT_ID as deptId,
+		DEPT_NAME as deptName,
+		PARENT_DEPT as parentDept,
+		DEPT_DESC as deptDesc
+		FROM T_URM_DEPT WHERE DEPT_ID IN(SELECT DEPT_ID FROM T_URM_DEPT_USER WHERE 1=1
+			<if test="userId!=null">
+				and [USER_ID]=#{userId}
+			</if>
+			<if test="isManager!=null">
+				and [IS_MANAGER]=#{isManager}
+			</if>
+			)
+	</select>
+	<!-- 查询用户的所属部门id -->
+	<select id="queryDeptsl" parameterType="Map" resultType = "sra.urm.vo.DeptUser" >
+		SELECT DEPT_ID as deptId,
+		USER_ID as userId
+		FROM T_URM_DEPT_USER WHERE 1=1
+		 and USER_ID in 
+		  <foreach item="item" index="index" collection="userIds" open="(" separator="," close=")" >
+				#{item}
+		  </foreach>
+	</select>
+	<select id="queryDeptUserTotal" resultType="hashMap" parameterType="sra.urm.vo.DeptUser">
+     select count(1) cnt 
+     from T_URM_DEPT_USER where 1=1 
+       	 <if test="deptId != null"> 
+		 and DEPT_ID = #{deptId} 
+		 </if>
+		       <if test="userId != null"> 
+		 and USER_ID = #{userId} 
+		 </if>
+		       <if test="isManager != null"> 
+		 and IS_MANAGER = #{isManager} 
+		 </if>
+	</select>
+	<select id="queryDeptIdBySetCodeAndUserId" resultType="hashMap" parameterType="hashMap">
+	  SELECT 
+	  DISTINCT
+	  	a.DEPT_ID as deptId,
+	  	c.DEPT_NAME as deptName
+	  FROM T_URM_DEPT_USER a 
+	  JOIN T_RT_SET_DEPT b ON a.DEPT_ID = b.DEPT_ID 
+	  <if test="setRole != null"> 
+		 JOIN T_RT_SET_USER d ON d.SET_CODE=b.SET_CODE AND d.DEPT_ID = a.DEPT_ID AND d.USER_ID = a.USER_ID AND d.USER_ROLE = #{setRole}
+	  </if>
+	  LEFT JOIN T_URM_DEPT c ON a.DEPT_ID = c.DEPT_ID
+	  WHERE a.USER_ID = #{userId} and b.SET_CODE = #{setCode}
+  	</select>
+  
+  <select id="queryUsersByDepts" resultType = "Map" parameterType = "Map">
+  SELECT 
+		b.USER_ID AS userId,
+		b.USER_NAME AS userName,
+		c.DEPT_ID AS deptId,
+		e.DEPT_NAME AS deptIdValue,
+		d.USER_ROLE AS userRole
+	FROM T_URM_USER b 
+		LEFT JOIN T_URM_DEPT_USER c 
+			ON b.USER_ID = c.USER_ID AND c.DEPT_ID IN
+			<foreach item="item" index="index" collection="deptIds" open="(" separator="," close=")" >
+				#{item}
+		    </foreach>
+		LEFT JOIN T_RT_SET_USER d
+			ON b.USER_ID = d.USER_ID 
+			and c.DEPT_ID = d.DEPT_ID 
+			and d.SET_CODE = #{setCode} 
+			and d.USER_ROLE = #{userRole}
+		LEFT JOIN T_URM_DEPT e 
+			ON e.DEPT_ID = c.DEPT_ID
+	WHERE b.USER_ID
+	IN(
+		SELECT USER_ID 
+		FROM T_URM_DEPT_USER a 
+		WHERE a.DEPT_ID 
+		IN 
+		<foreach item="item" index="index" collection="deptIds" open="(" separator="," close=")" >
+			#{item}
+	    </foreach>
+	)
+  
+  </select>
+  <select id="queryDeptNoUsers" parameterType="Map" resultType="hashmap" flushCache="false" useCache="false" teradataOrderBy="USER_ID">
+		SELECT USER_ID as "userId",
+		USER_NAME as "userName",
+		USER_ORG as "userOrg"
+		FROM T_URM_USER WHERE USER_ID NOT IN(SELECT USER_ID FROM T_URM_DEPT_USER WHERE 1=1
+		<if test="deptId!=null">
+			and DEPT_ID=#{deptId}
+		</if>
+		)
+	</select>
+	<select id="queryDeptAndUsers" parameterType="Map" resultType="hashmap" flushCache="false" useCache="false" teradataOrderBy="USER_ID">
+		SELECT USER_ID as "userId",
+		USER_NAME as "userName",
+		USER_ORG as "userOrg"
+		FROM [T_URM_USER] WHERE USER_ID IN(SELECT USER_ID FROM T_URM_DEPT_USER WHERE 1=1
+		<if test="deptId!=null">
+			and DEPT_ID=#{deptId}
+		</if>
+		)
+	</select>
+	
+	<select id="queryDeptUsersByDeptId" parameterType="Map" resultType="hashmap" flushCache="false" useCache="false" teradataOrderBy="USER_ID">
+		SELECT a.USER_ID as "userId",
+		a.USER_NAME as "userName",
+		a.USER_ORG as "userOrg",
+		b.IS_MANAGER as "isManager"
+		FROM T_URM_USER  a
+		JOIN T_URM_DEPT_USER b ON a.USER_ID = b.USER_ID
+		WHERE b.DEPT_ID=#{deptId}
+	</select>
+	<select id="queryDeptOfUsers" parameterType="Map" resultType="hashmap" flushCache="false" useCache="false" teradataOrderBy="DEPT_ID">
+		SELECT a.USER_ID as userId,
+	       USER_PWD as userPwd,
+	       USER_NAME as userName,
+	       USER_ORG as userOrg,
+	       TEL as tel,
+	       DEPT_ID as deptId,
+	       IS_MANAGER as isManager
+	    FROM T_URM_USER a INNER JOIN T_URM_DEPT_USER b ON a.USER_ID=b.USER_ID WHERE 1=1
+	    <if test="deptId!=null">
+			and b.DEPT_ID=#{deptId}
+		</if>
+	</select>
+	<select id="queryDeptOfUsers4Count" parameterType="Map" resultType="hashmap" flushCache="false" useCache="false">
+		SELECT  count(1) as "cnt" FROM T_URM_USER a INNER JOIN T_URM_DEPT_USER b ON a.USER_ID=b.USER_ID WHERE 1=1
+	    <if test="deptId!=null">
+			and b.DEPT_ID=#{deptId}
+		</if>
+	</select>
+	<select id="queryUserRoles" parameterType="Map" resultType="sra.urm.vo.Role" flushCache="false" useCache="false" teradataOrderBy="ROLE_CAT">
+		SELECT ROLE_CODE AS roleCode,
+		ROLE_NAME AS roleName,
+		ROLE_CAT AS roleCat,
+		ROLE_DESC AS roleDesc 
+		FROM T_URM_ROLE 
+		WHERE ROLE_CAT> (SELECT Min(ROLE_CAT) FROM T_URM_ROLE WHERE ROLE_CODE IN (SELECT ROLE_CODE FROM T_URM_USER_ROLE WHERE 1=1 
+		<if test="userId!=null">
+				and USER_ID=#{userId}
+		</if>)
+		) 
+	</select>
+	
+	<select id="getdeptId" resultType="map" parameterType="map">
+     select 
+     DEPT_ID as deptId,
+     IS_MANAGER as isManager
+     from T_URM_DEPT_USER 
+     where USER_ID = #{userId}
+     and  IS_MANAGER = 'Y'
+  </select>
+	
+</mapper>

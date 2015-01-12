@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.urm">
+
+  <select id="queryUser4Login" resultType="hashMap" parameterType="Map" teradataOrderBy="d.dept_id">
+	SELECT u.USER_ID as userId,u.USER_PWD as userPwd,u.USER_NAME+'('+d.DEPT_NAME+')' userName
+	FROM T_URM_USER u
+	left join (select max(b.DEPT_ID) as dept_id,max(b.DEPT_NAME) as dept_NAME,user_id from T_URM_DEPT_USER a join T_URM_DEPT b on a.dept_id = b.DEPT_ID group by user_id) d on u.USER_ID = d.USER_ID
+  </select>
+  <select id="queryUser4Login_Ct" resultType="hashMap" parameterType="Map">
+      select  count(*) as "c" FROM T_URM_USER u
+  </select>
+</mapper>

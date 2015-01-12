@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.param">
+  <insert id="insertFile" parameterType="map">
+     insert into T_ETL_FILE
+       (FILE_NAME,DATA_CAT,FILE_DESC,LOAD_PRD,FILE_LOADER,START_DT,FILE_STATUS) values 
+       (#{fileName},#{dataCat},#{fileDesc},#{loadPrd},#{fileLoader},#{startDt},#{fileStatus})
+  </insert>
+  <delete id="deleteFile" parameterType="map">
+     delete from T_ETL_FILE where FILE_NAME = #{fileName} 
+  </delete>
+  <update id="updateFile" parameterType="map">
+     update T_ETL_FILE 
+       <set>
+       <if test="dataCat != null">DATA_CAT = #{dataCat},</if>
+       <if test="fileDesc != null">FILE_DESC = #{fileDesc},</if>
+       <if test="loadPrd != null">LOAD_PRD = #{loadPrd},</if>
+       <if test="fileLoader != null">FILE_LOADER = #{fileLoader},</if>
+       <if test="startDt != null">START_DT = #{startDt},</if>
+       <if test="fileStatus != null">FILE_STATUS = #{fileStatus},</if>
+       
+       </set>
+       where FILE_NAME = #{fileName} 
+  </update>
+  <select id="loadFile" resultType="map" parameterType="map">
+     select 
+       FILE_NAME as fileName,
+       DATA_CAT as dataCat,
+       FILE_DESC as fileDesc,
+       LOAD_PRD as loadPrd,
+       FILE_LOADER as fileLoader,
+       START_DT as startDt,
+       FILE_STATUS as fileStatus
+     from T_ETL_FILE 
+     where FILE_NAME = #{fileName} 
+  </select>
+  <select id="queryFile" resultType="map" parameterType="map"  teradataOrderBy="FILE_NAME">
+     select 
+       FILE_NAME as fileName,
+       DATA_CAT as dataCat,
+       FILE_DESC as fileDesc,
+       LOAD_PRD as loadPrd,
+       FILE_LOADER as fileLoader,
+       START_DT as startDt,
+       FILE_STATUS as fileStatus
+     from T_ETL_FILE where 1=1 
+       <if test="fileName != null">and FILE_NAME = #{fileName}</if>
+       <if test="dataCat != null">and DATA_CAT = #{dataCat}</if>
+       <if test="fileDesc != null">and FILE_DESC = #{fileDesc}</if>
+       <if test="loadPrd != null">and LOAD_PRD = #{loadPrd}</if>
+       <if test="fileLoader != null">and FILE_LOADER = #{fileLoader}</if>
+       <if test="startDt != null">and START_DT = #{startDt}</if>
+       <if test="fileStatus != null">and FILE_STATUS = #{fileStatus}</if>
+  </select>
+  <select id="queryFileTotal" resultType="map" parameterType="map">
+     select count(1) cnt 
+     from T_ETL_FILE where 1=1 
+       <if test="fileName != null">and FILE_NAME = #{fileName}</if>
+       <if test="dataCat != null">and DATA_CAT = #{dataCat}</if>
+       <if test="fileDesc != null">and FILE_DESC = #{fileDesc}</if>
+       <if test="loadPrd != null">and LOAD_PRD = #{loadPrd}</if>
+       <if test="fileLoader != null">and FILE_LOADER = #{fileLoader}</if>
+       <if test="startDt != null">and START_DT = #{startDt}</if>
+       <if test="fileStatus != null">and FILE_STATUS = #{fileStatus}</if>
+  </select>
+</mapper>

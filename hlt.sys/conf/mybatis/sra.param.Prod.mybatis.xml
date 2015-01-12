@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.param">
+  <insert id="insertProd" parameterType="sra.param.vo.Prod">
+     insert into T_DEF_PROD
+       (PROD_CD,PROD_NAME,FROM_APP,START_DT) values 
+       (#{prodCd},#{prodName},#{fromApp},#{startDt})
+  </insert>
+  <delete id="deleteProd" parameterType="sra.param.vo.Prod">
+     delete from T_DEF_PROD 
+       where PROD_CD = #{prodCd} 
+  </delete>
+  <delete id="deleteProds" parameterType="Map">
+     delete from T_DEF_PROD where PROD_CD in 
+          <foreach item="item" index="index" collection="prodIds" open="(" separator="," close=")" >
+				#{item}
+		  </foreach>
+  </delete>
+  <update id="updateProd" parameterType="sra.param.vo.Prod">
+     update T_DEF_PROD 
+       <set>
+       <if test="prodCd != null">PROD_CD = #{prodCd},</if>
+       <if test="prodName != null">PROD_NAME = #{prodName},</if>
+       <if test="fromApp != null">FROM_APP = #{fromApp},</if>
+       <if test="startDt != null">START_DT = #{startDt},</if>
+       </set>
+       where PROD_CD = #{prodCd} 
+  </update>
+  <select id="loadProd" resultType="sra.param.vo.Prod" parameterType="sra.param.vo.Prod">
+     select 
+       PROD_CD as prodCd,
+       PROD_NAME as prodName,
+       FROM_APP as fromApp,
+       START_DT as startDt
+     from T_DEF_PROD 
+     where PROD_CD = #{prodCd} 
+  </select>
+  <select id="queryProds" resultType="hashMap" parameterType="sra.param.vo.Prod"  teradataOrderBy="PROD_CD">
+     select 
+       PROD_CD as prodCd,
+       PROD_NAME as prodName,
+       FROM_APP as fromApp,
+       START_DT as startDt
+     from T_DEF_PROD where 1=1 
+       <if test="prodCd != null"> 
+ and PROD_CD = #{prodCd} 
+ </if>
+       <if test="prodName != null"> 
+ and PROD_NAME like #{prodName} 
+ </if>
+       <if test="fromApp != null"> 
+ and FROM_APP = #{fromApp} 
+ </if>
+       <if test="startDt != null"> 
+ and START_DT = #{startDt} 
+ </if>
+  </select>
+  <select id="queryProdTotal" resultType="hashMap" parameterType="sra.param.vo.Prod">
+     select count(1) cnt 
+     from T_DEF_PROD where 1=1 
+       <if test="prodCd != null"> 
+ and PROD_CD = #{prodCd} 
+ </if>
+       <if test="prodName != null"> 
+ and PROD_NAME = #{prodName} 
+ </if>
+       <if test="fromApp != null"> 
+ and FROM_APP = #{fromApp} 
+ </if>
+       <if test="startDt != null"> 
+ and START_DT = #{startDt} 
+ </if>
+  </select>
+</mapper>

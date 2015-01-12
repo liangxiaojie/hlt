@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryRole">
+    <SELECT><![CDATA[
+      SELECT
+        t.ROLE_CODE as roleCode,
+        t.ROLE_NAME as roleName,
+        t.ROLE_CAT as roleCat,
+        t.ROLE_DESC as roleDesc
+      from T_URM_ROLE t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <roleCode>and t.ROLE_CODE = ?</roleCode>
+      <roleName>and t.ROLE_NAME = ?</roleName>
+      <roleCat>and t.ROLE_CAT = ?</roleCat>
+      <roleDesc>and t.ROLE_DESC = ?</roleDesc>
+    </WHERE>
+    ORDER BY ROLE_CAT ASC
+  </QUERY_STRING>
+</QUERY_STRING>

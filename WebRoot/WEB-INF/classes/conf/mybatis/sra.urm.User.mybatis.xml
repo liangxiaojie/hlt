@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.urm">
+  <insert id="insertUser" parameterType="sra.urm.vo.User">
+     insert into T_URM_USER
+       (USER_ID,USER_PWD,USER_NAME,USER_ORG,TEL) values 
+       (#{userId},#{userPwd},#{userName},#{userOrg},#{tel})
+  </insert>
+  <insert id="addUser" parameterType="sra.urm.vo.User" >
+            insert into [T_URM_USER]
+                     ([USER_ID] ,[USER_PWD] ,[USER_NAME] ,[USER_ORG],[TEL] )
+               values (#{userId,jdbcType=VARCHAR}  , #{userPwd,jdbcType=VARCHAR},
+				       #{userName,jdbcType=VARCHAR}, #{userOrg,jdbcType=VARCHAR},
+				       #{tel,jdbcType=VARCHAR})
+  </insert>
+  <delete id="deleteUser" parameterType="sra.urm.vo.User">
+     delete from T_URM_USER 
+       where USER_ID = #{userId} 
+  </delete>
+  <delete id="deleteUsers"  parameterType="Map" > 
+          delete from  [T_URM_USER]
+            where [USER_ID]  in 
+           <foreach item="item" index="index" collection="userIds" open="("
+				separator="," close=")">
+				#{item}
+			</foreach> 
+  </delete>
+  <update id="updateUser" parameterType="sra.urm.vo.User">
+     update T_URM_USER 
+       <set>
+       <if test="userId != null">USER_ID = #{userId},</if>
+       <if test="userPwd != null">USER_PWD = #{userPwd},</if>
+       <if test="userName != null">USER_NAME = #{userName},</if>
+       <if test="userOrg != null">USER_ORG = #{userOrg},</if>
+       <if test="tel!=null">TEL=#{tel},</if>
+       </set>
+       where USER_ID = #{userId} 
+  </update>
+  <select id="loadUser" resultType="sra.urm.vo.User" parameterType="sra.urm.vo.User">
+     select 
+       USER_ID as userId,
+       USER_PWD as userPwd,
+       USER_NAME as userName,
+       USER_ORG as userOrg,
+       TEL as tel
+     from T_URM_USER 
+     where USER_ID = #{userId} 
+  </select>
+  <select id="getUser" parameterType="Map" resultType="sra.urm.vo.User" flushCache="false" useCache="false">  
+           SELECT  [USER_ID] as "userId"
+			      ,[USER_NAME] as "userName"
+			      ,[USER_ORG]  as "userOrg"
+			      ,[TEL] as "tel"
+			  FROM [T_URM_USER]
+			  where  [USER_ID] = #{userId}
+     </select>
+   <select id="queryuser" resultType="sra.urm.vo.User" parameterType="Map" teradataOrderBy="USER_ID">
+     select 
+       USER_ID as userId,
+       USER_PWD as userPwd,
+       USER_NAME as userName,
+       USER_ORG as userOrg,
+       TEL as tel
+     from T_URM_USER      
+  </select>
+  <select id="queryuser4count" resultType="hashmap" parameterType="Map">
+     select 
+       count(*) as "c"
+     from T_URM_USER      
+  </select>
+  <select id="queryUsers4Count" parameterType="Map" resultType="hashmap" flushCache="false" useCache="false">  
+           SELECT  count(1) as "cnt"		       
+			  FROM [T_URM_USER]
+			  where 1=1
+			   <if test="userId != null"> 
+       		     and [USER_ID] = #{userId}
+		    </if>
+		     <if test="userPwd != null"> 
+       		     and [USER_PWD] = #{userPwd}
+		    </if>
+		     <if test="userName != null"> 
+       		     and [USER_NAME] like #{userName}
+		    </if>
+		     <if test="userOrg != null"> 
+       		     and [USER_ORG] = #{userOrg}
+		    </if>
+		    <if test="tel!=null">
+		    	and [TEL] = #{tel}
+		    </if>
+     </select>
+  <select id="queryUsers" parameterType="Map" resultType="sra.urm.vo.User" flushCache="false" useCache="false" teradataOrderBy ="USER_ID">  
+           SELECT  [USER_ID] as "userId"
+			      ,[USER_NAME] as "userName"
+			      ,[USER_ORG]  as "userOrg"
+			      ,[TEL] as "tel"
+			  FROM [T_URM_USER]
+			  where 1=1 
+			 <if test="userId != null"> 
+       		     and [USER_ID] = #{userId}
+		    </if>
+		     <if test="userName != null"> 
+       		     and [USER_NAME] like #{userName}
+		    </if>
+		     <if test="userOrg != null"> 
+       		     and [USER_ORG] = #{userOrg}
+		    </if>
+		    <if test="tel!=null">
+		    	and [TEL] = #{tel}
+		    </if>
+     </select>
+       <select id="queryAllUserAndDepts" parameterType="Map" resultType="sra.urm.vo.User" flushCache="false" useCache="false" teradataOrderBy ="a.USER_ID">  
+           SELECT 
+			a.USER_ID AS userId,
+			a.USER_NAME AS userName,
+			a.USER_ORG AS userOrg,
+			a.TEL AS tel,
+			b.DEPT_ID AS deptId,
+			c.DEPT_NAME AS deptName
+			FROM T_URM_USER a 
+			LEFT JOIN T_URM_DEPT_USER b ON a.USER_ID = b.USER_ID 
+			LEFT JOIN T_URM_DEPT c ON b.DEPT_ID = c.DEPT_ID
+			where 1=1 
+			 <if test="userId != null"> 
+       		     and a.USER_ID = #{userId}
+		    </if>
+		     <if test="userName != null"> 
+       		     and a.USER_NAME like #{userName}
+		    </if>
+		     <if test="userOrg != null"> 
+       		     and a.USER_ORG = #{userOrg}
+		    </if>
+		    <if test="tel!=null">
+		    	and a.TEL = #{tel}
+		    </if>
+     </select>
+     
+     <select id="queryUsersInOrg" parameterType="Map" resultType="sra.urm.vo.User" flushCache="false" useCache="false" teradataOrderBy ="USER_ID">  
+           SELECT  [USER_ID] as "userId"
+			      ,[USER_PWD] as "userPwd"
+			      ,[USER_NAME] as "userName"
+			      ,[USER_ORG]  as "userOrg"
+			      ,[TEL] as "tel"
+			  FROM [T_URM_USER]
+			  where 1=1 and [USER_ORG] in
+			<foreach item="item" index="index" collection="orgNum" open="("
+				separator="," close=")">
+				#{item}
+			</foreach> 
+     </select>
+</mapper>

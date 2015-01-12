@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.urm">
+  <insert id="insertCodeCat" parameterType="map">
+     insert into T_SYS_CODE_CAT
+       (CAT_CODE,CAT_NAME,CAT_MEMO) values 
+       (#{catCode},#{catName},#{catMemo})
+  </insert>
+  <delete id="deleteCodeCat" parameterType="map">
+     delete from T_SYS_CODE_CAT 
+       where CAT_CODE = #{catCode} 
+  </delete>
+  <delete id="deleteCodeCats" parameterType="Map">
+  	delete from T_SYS_CODE_CAT
+  		where CAT_CODE IN
+  		<foreach item="item" index="index" collection="codeCatCodes" open="(" separator="," close=")" >
+  			#{item}
+  		</foreach>
+  </delete>
+  <update id="updateCodeCat" parameterType="map">
+     update T_SYS_CODE_CAT 
+       <set>
+       <if test="catCode != null">CAT_CODE = #{catCode},</if>
+       <if test="catName != null">CAT_NAME = #{catName},</if>
+       <if test="catMemo != null">CAT_MEMO = #{catMemo},</if>
+       </set>
+       where CAT_CODE = #{catCode} 
+  </update>
+  <select id="loadCodeCat" resultType="sra.param.vo.CodeCat" parameterType="map">
+     select 
+       CAT_CODE as catCode,
+       CAT_NAME as catName,
+       CAT_MEMO as catMemo
+     from T_SYS_CODE_CAT 
+     where CAT_CODE = #{catCode} 
+  </select>
+  <select id="queryCodeCats" parameterType="hashMap" resultType="sra.param.vo.CodeCat" flushCache="false" useCache="false" teradataOrderBy ="CAT_CODE">
+     select 
+       CAT_CODE as catCode,
+       CAT_NAME as catName,
+       CAT_MEMO as catMemo
+     from T_SYS_CODE_CAT where 1=1 
+       <if test="catCode != null"> 
+ and CAT_CODE = #{catCode} 
+ </if>
+       <if test="catName != null"> 
+ and CAT_NAME like #{catName} 
+ </if>
+       <if test="catMemo != null"> 
+ and CAT_MEMO = #{catMemo} 
+ </if>
+  </select>
+  <select id="queryCodeCatTotal" resultType="hashMap" parameterType="map">
+     select count(1) cnt 
+     from T_SYS_CODE_CAT where 1=1 
+       <if test="catCode != null"> 
+ and CAT_CODE = #{catCode} 
+ </if>
+       <if test="catName != null"> 
+ and CAT_NAME = #{catName} 
+ </if>
+       <if test="catMemo != null"> 
+ and CAT_MEMO = #{catMemo} 
+ </if>
+  </select>
+</mapper>

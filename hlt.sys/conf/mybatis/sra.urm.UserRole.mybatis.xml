@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.urm">
+  <insert id="insertUserRole" parameterType="sra.urm.vo.UserRole">
+     insert into T_URM_USER_ROLE
+       (ROLE_CODE,USER_ID) values 
+       (#{roleCode},#{userId})
+  </insert>
+  <insert id="addRoleOfUser" parameterType="sra.urm.vo.UserRole">
+     	insert into [T_URM_USER_ROLE]([ROLE_CODE],[USER_ID]) values (#{roleCode,jdbcType=VARCHAR},#{userId,jdbcType=VARCHAR})
+  </insert>
+  <delete id="deleteUserRole" parameterType="sra.urm.vo.UserRole">
+     delete from T_URM_USER_ROLE 
+       where ROLE_CODE = #{roleCode} 
+          and USER_ID = #{userId} 
+  </delete>
+  <delete id="deleteRoleOfUser" parameterType="Map">
+		delete from [T_URM_USER_ROLE] where [USER_ID] in 
+		<foreach item="item" index="index" collection="userIds" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<delete id="deleteRolesOfUser" parameterType="Map">
+		delete from T_URM_USER_ROLE where 1=1 AND USER_ID=#{userId} 
+		AND ROLE_CODE in 
+		<foreach item="item" index="index" collection="roleCodes" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+  <select id="loadUserRole" resultType="sra.urm.vo.UserRole" parameterType="sra.urm.vo.UserRole">
+     select 
+       ROLE_CODE as roleCode,
+       USER_ID as userId
+     from T_URM_USER_ROLE 
+     where ROLE_CODE = #{roleCode} 
+        and USER_ID = #{userId} 
+  </select>
+  <select id="queryUserNoRoles" parameterType="Map" resultType="hashmap" flushCache="false" useCache="false" teradataOrderBy="ROLE_CAT">
+		SELECT [ROLE_CODE] as "roleCode",
+		[ROLE_NAME] as "roleName",
+		[ROLE_CAT] as "roleCat",
+		[ROLE_DESC] as "roleDesc" 
+		FROM [T_URM_ROLE] WHERE ROLE_CODE NOT IN(SELECT ROLE_CODE FROM T_URM_USER_ROLE WHERE 1=1
+		<if test="userId!=null">
+			and [USER_ID]=#{userId}
+		</if>
+		)
+	</select>
+	<select id="queryUserAndRoles" parameterType="Map" resultType="hashmap" flushCache="false" useCache="false" teradataOrderBy="ROLE_CAT">
+		SELECT [ROLE_CODE] as "roleCode",
+		[ROLE_NAME] as "roleName",
+		[ROLE_CAT] as "roleCat",
+		[ROLE_DESC] as "roleDesc" 
+		FROM [T_URM_ROLE] WHERE ROLE_CODE IN(SELECT ROLE_CODE FROM T_URM_USER_ROLE WHERE 1=1
+		<if test="userId!=null">
+			and [USER_ID]=#{userId}
+		</if>
+		)
+	</select>
+</mapper>

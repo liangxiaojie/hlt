@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.param">
+  <insert id="insertValueDef" parameterType="sra.param.vo.ValueDef">
+     insert into T_SYS_VALUE_DEF
+       (VALUE_CD,VALUE_NAME,DATA_TYPE,VALUE_DESC) values 
+       (#{valueCd},#{valueName},#{dataType},#{valueDesc})
+  </insert>
+  <delete id="deleteValueDef" parameterType="sra.param.vo.ValueDef">
+     delete from T_SYS_VALUE_DEF 
+       where VALUE_CD = #{valueCd} 
+  </delete>
+  <delete id="deleteValueDefs" parameterType="Map">
+     delete from T_SYS_VALUE_DEF where VALUE_CD in 
+          <foreach item="item" index="index" collection="valueDefIds" open="(" separator="," close=")" >
+				#{item}
+		  </foreach>
+  </delete>
+  <update id="updateValueDef" parameterType="sra.param.vo.ValueDef">
+     update T_SYS_VALUE_DEF 
+       <set>
+       <if test="valueCd != null">VALUE_CD = #{valueCd},</if>
+       <if test="valueName != null">VALUE_NAME = #{valueName},</if>
+       <if test="dataType != null">DATA_TYPE = #{dataType},</if>
+       <if test="valueDesc != null">VALUE_DESC = #{valueDesc},</if>
+       </set>
+       where VALUE_CD = #{valueCd} 
+  </update>
+  <select id="loadValueDef" resultType="sra.param.vo.ValueDef" parameterType="sra.param.vo.ValueDef">
+     select 
+       VALUE_CD as valueCd,
+       VALUE_NAME as valueName,
+       DATA_TYPE as dataType,
+       VALUE_DESC as valueDesc
+     from T_SYS_VALUE_DEF 
+     where VALUE_CD = #{valueCd} 
+  </select>
+  <select id="queryValueDefs" resultType="hashMap" parameterType="sra.param.vo.ValueDef"  teradataOrderBy="VALUE_CD">
+     select 
+       VALUE_CD as valueCd,
+       VALUE_NAME as valueName,
+       DATA_TYPE as dataType,
+       VALUE_DESC as valueDesc
+     from T_SYS_VALUE_DEF where 1=1 
+       <if test="valueCd != null"> 
+ and VALUE_CD = #{valueCd} 
+ </if>
+       <if test="valueName != null"> 
+ and VALUE_NAME = #{valueName} 
+ </if>
+       <if test="dataType != null"> 
+ and DATA_TYPE = #{dataType} 
+ </if>
+       <if test="valueDesc != null"> 
+ and VALUE_DESC = #{valueDesc} 
+ </if>
+  </select>
+  <select id="queryValueDefTotal" resultType="hashMap" parameterType="sra.param.vo.ValueDef">
+     select count(1) cnt 
+     from T_SYS_VALUE_DEF where 1=1 
+       <if test="valueCd != null"> 
+ and VALUE_CD = #{valueCd} 
+ </if>
+       <if test="valueName != null"> 
+ and VALUE_NAME = #{valueName} 
+ </if>
+       <if test="dataType != null"> 
+ and DATA_TYPE = #{dataType} 
+ </if>
+       <if test="valueDesc != null"> 
+ and VALUE_DESC = #{valueDesc} 
+ </if>
+  </select>
+</mapper>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.urm">
+  <insert id="insertRole" parameterType="sra.urm.vo.Role">
+     insert into T_URM_ROLE
+       (ROLE_CODE,ROLE_NAME,ROLE_CAT,ROLE_DESC) values 
+       (#{roleCode},#{roleName},#{roleCat},#{roleDesc})
+  </insert>
+  <insert id="addRole" parameterType="sra.urm.vo.Role">
+     	insert into [T_URM_ROLE]([ROLE_CODE],[ROLE_NAME],[ROLE_CAT],[ROLE_DESC]) values (#{roleCode,jdbcType=VARCHAR},#{roleName,jdbcType=VARCHAR},#{roleCat,jdbcType=VARCHAR},#{roleDesc,jdbcType=VARCHAR})
+  </insert>
+  <delete id="deleteRole" parameterType="sra.urm.vo.Role">
+     delete from T_URM_ROLE 
+       where ROLE_CODE = #{roleCode} 
+  </delete>
+  <delete id="deleteRoles" parameterType="Map">
+		delete from [T_URM_ROLE] where [ROLE_CODE] in 
+		<foreach item="item" index="index" collection="roleCodes" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+  <update id="updateRole" parameterType="sra.urm.vo.Role">
+     update T_URM_ROLE 
+       <set>
+       <if test="roleCode != null">ROLE_CODE = #{roleCode},</if>
+       <if test="roleName != null">ROLE_NAME = #{roleName},</if>
+       <if test="roleCat != null">ROLE_CAT = #{roleCat},</if>
+       <if test="roleDesc != null">ROLE_DESC = #{roleDesc},</if>
+       </set>
+       where ROLE_CODE = #{roleCode} 
+  </update>
+  <select id="loadRole" resultType="sra.urm.vo.Role" parameterType="sra.urm.vo.Role">
+     select 
+       ROLE_CODE as roleCode,
+       ROLE_NAME as roleName,
+       ROLE_CAT as roleCat,
+       ROLE_DESC as roleDesc
+     from T_URM_ROLE 
+     where ROLE_CODE = #{roleCode} ORDER BY ROLE_CAT ASC
+  </select>
+  <select id="getRole" parameterType="Map" resultType="sra.urm.vo.Role" flushCache="false" useCache="false">
+     	SELECT [ROLE_CODE] as "roleCode",
+     	[ROLE_NAME] as "roleName",
+     	[ROLE_CAT] as "roleCat",
+     	[ROLE_DESC] as "roleDesc"
+     	FROM [T_URM_ROLE]
+     	where [ROLE_CODE]=#{roleCode} ORDER BY ROLE_CAT ASC
+     </select>
+   <select id="queryRoles" parameterType="Map" resultType="sra.urm.vo.Role" flushCache="false" useCache="false" teradataOrderBy="ROLE_CAT">
+		SELECT [ROLE_CODE] as "roleCode",
+		[ROLE_NAME] as "roleName",
+		[ROLE_CAT] as "roleCat",
+		[ROLE_DESC] as "roleDesc"
+		FROM [T_URM_ROLE] WHERE 1=1
+		<if test="roleCode!=null">
+			and [ROLE_CODE]=#{roleCode}		
+		</if>
+		<if test="roleName!=null">
+			and [ROLE_NAME] like #{roleName}
+		</if>
+		<if test="roleCat!=null">
+			and [ROLE_CAT] =#{roleCat}
+		</if>
+		<if test="roleDesc!=null">
+			and [ROLE_DESC] like #{roleDesc}
+		</if>
+	</select>
+	<select id="queryRoles4Count" parameterType="Map" resultType="hashMap" flushCache="false" useCache="true">
+		SELECT count(1) as "cnt" FROM [T_URM_ROLE] WHERE 1=1
+		<if test="roleCode!=null">
+			and [ROLE_CODE]=#{roleCode}		
+		</if>
+		<if test="roleName!=null">
+			and [ROLE_NAME] =#{roleName}
+		</if>
+		<if test="roleCat!=null">
+			and [ROLE_CAT] =#{roleCat}
+		</if>
+		<if test="roleDesc!=null">
+			and [ROLE_DESC] =#{roleDesc}
+		</if>
+	</select>
+	   <select id="queryAllRoles" resultType="hashMap" flushCache="false" useCache="false" teradataOrderBy="ROLE_CAT">
+		SELECT [ROLE_CODE] as "roleCode",
+		[ROLE_NAME] as "roleName",
+		[ROLE_CAT] as "roleCat",
+		[ROLE_DESC] as "roleDesc"
+		FROM [T_URM_ROLE] WHERE 1=1
+	</select>
+</mapper>

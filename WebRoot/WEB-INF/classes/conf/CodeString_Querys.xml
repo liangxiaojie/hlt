@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeString_Querys>
+
+<!--   <CodeString_Query>
+    select a.CAT_CODE as catCode,
+           '1' as catType,
+           a.CAT_NAME as catName,
+           a.CAT_MEMO as catMemo,
+           b.ITEM_CODE as itemCode,
+           b.ITEM_NAME as itemName,
+           b.ITEM_SEQ   as itemSeq,
+           b.UPPER_CODE as upperCode,
+           b.ITEM_MEMO  as itemMemo
+      from sra.dbo.T_SYS_CODE_CAT a
+      left join sra.dbo.T_SYS_CODE_ITEM b on a.CAT_CODE = b.CAT_CODE
+      order by a.CAT_CODE,b.ITEM_SEQ
+  </CodeString_Query> -->
+ 
+</CodeString_Querys>

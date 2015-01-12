@@ -1,0 +1,795 @@
+body,
+button,
+input,
+select,
+textarea {
+	color: #777;
+	font-family: 'PT Sans', sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+}
+
+/* Headings */
+h1,h2,h3,h4,h5,h6 {
+	clear: both;
+	font-family: 'PT Sans', sans-serif;
+}
+
+/* Links */
+a {
+	color: royalblue;
+}
+a:visited {
+	color: purple;
+}
+a:hover,
+a:focus,
+a:active {
+	color: midnightblue;
+	text-decoration: none;
+}
+
+/* Header */
+
+#masthead{
+	background: #fff;
+}
+.top{
+	padding: 20px 0px;
+}
+
+.site-branding h1{
+	font-weight: bold;
+}
+
+.logo{
+	margin-top:20px;
+}
+
+.social-buttons ul{
+	list-style: none;
+	
+}
+
+.social-buttons ul li{
+	float: right;
+	margin: 20px 10px 0px 0px;
+	width: 32px;
+	height: 32px;
+	}
+	
+.social-button ul li img{
+	width: 100%;
+	height: 100%;
+}
+
+/* Layout */
+
+#primary, #secondary{
+	padding-top: 20px ;
+	padding-bottom:20px;
+}
+
+#content{
+	background:#fff;
+	padding-bottom: 40px;
+}
+/* Menu */
+
+
+/* Subheader */
+
+.subhead{
+	padding: 50px 0px;
+	background: #555;
+}
+
+img.subheadbg{
+	display: block;
+	margin: 0px auto;
+}
+
+subinner{
+	position: absolute;
+	width: 100%;
+	top:50px;
+	
+}
+.wednames{
+	font-size: 60px;
+	text-align: center;
+	color: #fff;
+	font-family: Cherry swash;
+	margin-bottom: 40px;
+	text-shadow: 2px 2px 2px #111;
+}
+
+.wednames span{
+	font-size: 24px;
+	font-family: PT Sans;
+	display: block;
+}
+.bridecol,.groomcol{
+	height: 200px;
+	border-radius: 100px;
+	background: rgba(255,255,255,.8);
+	margin-bottom: 20px;
+	position: relative;
+
+}
+
+@-webkit-keyframes pulse {
+	from {
+		-webkit-transform: scale(1.0);
+		opacity: 1;
+	}
+	50% {
+		-webkit-transform: scale(1.2);
+		opacity: 0.75;
+	}
+	to { 
+		-webkit-transform: scale(1.0);
+		opacity: 1;
+	}
+}
+
+
+.cplus{
+	width: 80px;
+	height: 80px;
+	border-radius: 30px;
+	color: #f20e0e;
+	font-size:80px;
+	position: absolute;
+	right: -50px;
+	top:50%;
+	margin-top:-40px;
+	z-index: 100;
+	
+}
+
+.cplus { 
+	-webkit-animation-name: pulse; 
+	-webkit-animation-duration: 1.2s; 
+	-webkit-animation-iteration-count: infinite; 
+}
+
+.bridepic{
+	height: 160px;
+	width: 160px;
+	border-radius: 80px;
+	margin: 20px;
+	float: left;
+	overflow:hidden;
+
+}
+
+.brideinfo{
+	float: left;
+	margin-top:50px;
+}
+
+.groominfo{
+	float: right;
+	margin-top:50px;
+	text-align: right;
+}
+
+.brideinfo h3, .groominfo h3{
+	font-family: Cherry swash;
+	font-size: 26px;
+}
+
+.groompic{
+	height: 160px;
+	width: 160px;
+	border-radius: 80px;
+	margin: 20px;
+
+	float: right;
+	overflow: hidden;
+}
+
+/* Timer */
+
+h2.section-title{
+	font-size: 36px;
+	margin: 50px 0px 30px 0px;
+	font-family: Cherry swash;
+	color: #769A38;
+}
+
+h2.section-title span{
+	font-size: 14px;
+	font-family: PT sans;
+	
+}
+
+h2.section-title span a{
+	color: #666;
+}
+
+.timer-box{
+	background:url(../images/swirl.png);
+	border-bottom: 1px solid #efefef;
+}
+
+h2.timehead{
+	font-size: 42px;
+	color: #555;
+	text-align: center;
+	font-family: Cherry swash;
+	margin-top:40px;
+}
+
+#ctimer{
+	width: 320px;
+	margin: 0px auto;
+	margin-bottom: 30px;
+}
+
+#ctimer span{
+	display: inline-block;
+	background: #769a38;
+	color: #fff;
+	text-align: center;
+	margin: 20px 10px;
+	width: 80px;
+	height: 80px;
+	border-radius: 3px;
+	
+}
+
+#ctimer span h3{
+	margin: 15px 0px 0px 0px;
+	padding: 0px;
+	font-weight: bold;
+	font-size: 32px;
+	
+}
+
+/* Story box */
+
+.story-box{
+	
+}
+
+.dstory{
+	
+}
+
+.dstory h3{
+	color: #222;
+	font-weight: bold;
+}
+
+/* Home album */
+
+.albumcover{
+	
+}
+
+.album-post{
+	margin-bottom: 30px;
+}
+
+.album-pic{
+	margin-top:30px;
+}
+.home-post h3{
+	font-weight: bold;
+	color: #222;
+}
+
+.home-post img {
+	display: block;
+
+}
+
+/* Blog */
+
+.entry-header{
+	
+}
+
+.entry-header h1.entry-title{
+	margin-bottom: 5px;
+	font-weight: 900;
+	color: #444;
+}
+
+.entry-header h1.entry-title a:link, .entry-header h1.entry-title a:visited{
+	color: #444;
+}
+
+
+.entry-header .entry-meta{
+	margin: 0px 0px 0px 0px;
+	color: #777;
+}
+.entry-header .entry-meta a:link, .entry-header .entry-meta a:visited{
+
+}
+
+img.postimg{
+	margin-bottom: 20px;
+}
+
+
+/* Sidebar */
+
+.widget {
+	margin: 0 0px 30px 0px;
+	
+}
+
+h2.widget-title, h3.sidetitl {
+
+    font-size: 20px;
+ 	color:#444;
+ 	height: 50px;
+ 	font-weight: 900;
+ 	text-transform: uppercase;
+  	line-height: 50px;
+ 	
+}
+
+.widget ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px 0px 20px 0px;
+}
+
+.widget li {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.widget ul ul {
+    list-style-type: none;
+    background-repeat: no-repeat;
+    margin: 0px;
+    padding: 0px;
+}
+
+.widget ul li {
+    list-style-type: none;
+    margin: 0px;
+    margin: 0px 0px;
+    color: #5a5a5a;
+}
+
+.widget ul li a:link,.widget ul li a:visited {
+    color: #5a5a5a;
+    text-decoration: none;
+}
+
+.widget ul li a:hover{
+	color: #222;
+}
+
+.widget.widget_categories ul li,.widget.widget_pages ul li,.widget.widget_archive ul li,.widget.widget_links ul li,.widget.widget_meta ul li {
+    border-bottom: 1px dotted #ddd;
+    padding: 7px 0px;
+}
+
+.widget.widget_recent_entries ul li  {
+	padding: 7px 0px;
+     border-bottom: 1px dotted  #ddd;
+}
+
+.widget ul#recentcomments li.recentcomments {
+     border-bottom: 1px dotted  #ddd;
+    padding: 7px 0;
+}
+
+.widget .textwidget p {
+    padding: 0px 0px;
+}
+
+.widget .tagcloud {
+    padding: 0px 0px 20px 0px;
+}
+
+.widget .tagcloud a{
+	color:#F5634A;
+}
+
+.widget #calendar_wrap{
+	padding:0px 20px 20px 20px;
+	color: #6f7779;
+}
+
+.widget_ns_mailchimp{
+	background: #fff;
+	border:1px solid #eaeaea;
+	padding: 20px 20px;
+}
+
+.widget_ns_mailchimp input.button{
+	width: 110px;
+	margin: 10px 0px 0px 0px;
+}
+
+
+.squarebanner{
+
+}
+
+
+.squarebanner ul{
+	margin:0px 0px 0px 0px;
+	padding:0px 0px 10px 0px !important;
+
+}
+
+.squarebanner ul li{
+	margin:10px 20px 5px 0px;
+	list-style:none;
+	float:left;
+
+}
+.squarebanner ul li img{
+	
+}
+
+li.rbanner{
+	margin-right:0px!important;
+}
+
+
+/* Comments */
+
+#comments{
+	margin:20px 0px;
+}
+
+h2.comments-title{
+	font-size: 24px;
+	margin-bottom: 20px;
+	color: #000;
+	font-weight: bold;
+}
+
+#comments ol.comment-list {
+    clear: both;
+    overflow: hidden;
+    list-style: none;
+    margin: 0;
+}
+
+#comments ol.comment-list li.comment,#comments ol.comment-list li.pingback {
+    margin: 0px 0px 10px 0px;
+    padding: 0px 0px;
+    line-height: 1.6;
+
+}
+
+.comment-body{
+	position: relative;
+}
+ol.comment-list li .comment-author .avatar {
+     margin: 10px 10px 20px 0px;
+     float:left;
+     width:64px;
+     height: 64px;
+	 padding: 4px;
+	 border:1px solid #eee;
+}
+
+cite.fn {
+    color: #444;
+    font-style:normal;
+    font-weight:bold;
+    font-size:14px;
+    padding-top: 10px;
+    display: inline-block;
+}
+
+cite.fn a:link,cite.fn a:visited {
+	color:#444;
+}
+
+ol.comment-list li .comment-meta{
+
+	padding-bottom: 10px;
+}
+
+ol.comment-list li .comment-meta a {
+    
+    text-decoration: none!important;
+    
+    
+}
+
+.comment-meta{
+	position: relative;
+}
+.comment-metadata{
+	font-size: 12px;
+	color: #999;
+	position: relative;
+}
+
+.comment-metadata a:link, .comment-metadata a:visited{
+	color: #999;
+}
+
+.comment-content{
+	padding: 0px 10px 10px 74px;
+
+}
+
+ol.comment-list li .reply {
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    right: 0px;
+    top:15px;
+    background: #666;
+    padding: 3px 10px;
+    border-radius: 3px;
+    
+}
+
+ol.comment-list li .reply a {
+    color: #fff;
+
+}
+
+.space{
+	height:30px;
+}
+
+
+ol.comment-list li ul.children {
+    list-style: none;
+    text-indent: 0;
+    margin: 20px 0px 0px 50px;
+}
+
+
+#respond {
+    margin: 30px 0;
+
+}
+
+#respond h3 {
+    font-size: 18px;
+    color: #444;
+    padding: 5px 0px;
+    margin:0px 0px;
+}
+
+#commentform {
+    padding: 0px 0px;
+}
+
+#commentform p {
+    color: #777;
+    margin: 5px 0;
+}
+
+.form-allowed-tags{
+	font-size:13px;
+}
+
+#respond label {
+    display:inline;
+    color: #777;
+    padding: 5px 0;
+}
+
+#respond input {
+    background: #fff;
+    border: 1px solid #ddd;
+    color: #777;
+    margin: 0 10px 10px 0;
+    padding: 5px;
+}
+
+#commentform input {
+    width: 50%;
+    display:block;
+    margin-top:5px;
+}
+
+#respond input#submit {
+	width:130px;
+    background:#eee;
+    color: #555;
+    cursor: pointer;
+    margin: 10px 0;
+    padding: 5px 10px;
+    border: 1px solid #bbb;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+textarea#comment {
+    display:block;
+    margin-top:5px;
+    background: #fff;
+    border: 1px solid #ddd;
+    width: 70%;
+    color: #333;
+    margin: 5px 0 0;
+    padding: 10px 10px;
+}
+
+
+.form-allowed-tags{
+	padding:20px 0px;
+
+}
+
+
+
+/* Footer widgets */
+
+.footer-widget-section{
+	background: #769a38;
+	padding: 30px 0px;
+
+}
+
+
+h2.bothead{
+    font-size: 20px;
+    padding: 0px 0px;
+	color:#fff;
+	margin-bottom: 20px;
+	font-weight: 900;
+	font-family: Cherry swash;
+		}
+	
+.botwid{
+	
+	color: #818181;
+	list-style:none;
+	font-size: 14px;
+	}
+	
+.botwid ul {
+	list-style-type: none;
+	margin:  0px;
+	padding: 0px 0px 20px 0px ;
+
+
+	}
+.botwid li{
+	list-style-type: none;
+	margin: 0 ;
+	padding: 0px 0px;
+   border-bottom: 1px dotted rgba(255,255,255,.3);
+	}
+.botwid ul ul  {
+	list-style-type: none;
+	margin: 0;
+	padding: 0px 0px 0px 0px;
+	background-repeat:no-repeat;
+		}
+
+.botwid ul ul ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	border:0;
+	}
+
+.botwid ul ul ul ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	border:0;
+
+	}
+
+.botwid ul li {
+	height:100%;
+	line-height:18px;
+	clear: left;	
+	list-style-type: none;
+	color: #fff;
+	}
+	
+.botwid ul li a:link, .botwid ul li a:visited  {
+	
+	color: #fff;
+	text-decoration: none;
+	padding: 7px 0px 7px 0px;
+	display:block;
+
+	}
+
+.botwid ul li a:hover{
+
+	color: #fff;
+	}
+
+.botwid p{
+	padding: 5px 0px;
+	margin:0;
+	line-height:150%;
+	
+	}
+
+.botwid table {
+	width:100%;
+	text-align:center;
+	color: #818181;
+	}		
+		
+.botwid ul#recentcomments li.recentcomments {
+     border-bottom: 1px solid #5a5c5e;
+    padding:7px 0;
+}
+
+/* Footer */
+
+.site-footer{
+	background: #141414;
+	padding: 20px 0px;
+	color: #aaa;
+	font-size: 14px;
+}
+
+.site-footer a:link, .site-footer a:visited, .site-footer a:hover{
+	color: #aaa;
+}
+
+.go-top{
+	font-size: 24px;
+	float: right;
+	margin-top:10px;
+	
+}
+
+/* media queries */
+
+
+@media (max-width: 992px) {
+	.cplus{
+		display: none;
+	}
+	.bridecol,.groomcol{
+	height: 160px;
+	border-radius: 80px;
+	background: rgba(255,255,255,.8);
+	margin-bottom: 20px;
+	position: relative;
+	min-width: 300px;
+}
+
+.bridepic{
+	height: 120px;
+	width: 120px;
+	border-radius: 60px;
+	margin: 20px;
+	float: left;
+	overflow:hidden;
+
+}
+
+.groompic{
+	height: 120px;
+	width: 120px;
+	border-radius: 60px;
+	margin: 20px;
+	float: right;
+	overflow:hidden;
+
+}
+
+.brideinfo, .groominfo{
+	margin-top:30px;
+}
+
+.social-buttons ul{
+	margin: 10px auto;
+	width: 180px;
+}
+
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hlt.base">
+	<select id="queryUser" resultType="map" parameterType="map" teradataOrderBy="userId"  >
+		SELECT USER_ID as userId,
+			   USER_PWD as userPwd,
+			   USER_NAME as userName,
+			   TEL as tel,
+			   REMARKS remarks
+		FROM T_URM_USER
+	</select>	
+		
+	<select id="queryUserTotal" resultType="map" parameterType="map"  >
+		SELECT count(1) cnt FROM T_URM_USER
+	</select>
+</mapper>

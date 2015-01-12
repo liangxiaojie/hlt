@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryDimeDef">
+    <SELECT><![CDATA[
+      SELECT
+        t.DIME_CD as dimeCd,
+        t.DIME_NAME as dimeName,
+        t.DATA_TYPE as dataType,
+        t.CODE_STRING as codeString,
+        t.DIME_DESC as dimeDesc
+      from T_SYS_DIME_DEF t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <dimeCd>and t.DIME_CD = ?</dimeCd>
+      <dimeName>and t.DIME_NAME = ?</dimeName>
+      <dataType>and t.DATA_TYPE = ?</dataType>
+      <codeString>and t.CODE_STRING = ?</codeString>
+      <dimeDesc>and t.DIME_DESC = ?</dimeDesc>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!--
+	系统参数
+	@author dunkee
+-->
+<PARAMETERS EAR="sra">
+
+  <!-- 应用所有数据根目录 -->
+  <PARAMETER NAME="APP_DATA_PATH">c:\sra\data\app\</PARAMETER>
+  
+  <PARAMETER NAME="SRA_DATA_ETL_PATH">c:\sra\data\etl\</PARAMETER>
+  <PARAMETER NAME="TMP_DATA_PATH">c:\sra\data\tmp\</PARAMETER>
+  
+  <PARAMETER NAME="ATTACHMENT_DATA_PATH">c:\sra\data\attachment\</PARAMETER>
+
+ <!--  <PARAMETER NAME="SRV_BASE">http://edw142p.cmbc.com.cn:80/base</PARAMETER> -->
+  
+</PARAMETERS>

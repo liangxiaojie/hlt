@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CommandMapping>
+
+	<!--comm.begin -->
+	<module name="sys">
+		<mapping path="/login.do"   command="sra.login.web.LoginCommand" />
+		<mapping path="/urm.do"    command="sra.urm.web.UrmMCommand" />
+		
+		<mapping path="/param.do"   command="sra.param.web.ParamMCommand" />
+		
+	</module>
+
+
+
+</CommandMapping>

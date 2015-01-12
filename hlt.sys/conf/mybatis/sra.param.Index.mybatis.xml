@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.param">
+	<insert id="insertIndex" parameterType="sra.param.vo.Index">
+		insert into T_DEF_INDEX
+		(INDEX_CD,SET_CODE,START_DT,INDEX_NAME,DT_TABLE,CALC_CIRCLE,CALC_ORG,CALC_CURRY,SUPER_CD,INDEX_DESC,DT_CLEAR,vcd01,vcd02,vcd03,vcd04,vcd05,vcd06,vcd07,vcd08,vcd09,vcd10,vcd11,vcd12,vcd13,vcd14,vcd15)
+		values
+		(#{indexCd},#{setCode},#{startDt},#{indexName},#{dtTable},#{calcCircle},#{calcOrg},#{calcCurry},#{superCd},#{indexDesc},#{dtClear},
+		#{vcd01},#{vcd02},#{vcd03},#{vcd04},#{vcd05},#{vcd06},#{vcd07},#{vcd08},#{vcd09},#{vcd10},#{vcd11},#{vcd12},#{vcd13},#{vcd14},#{vcd15})
+	</insert>
+	<delete id="deleteIndex" parameterType="sra.param.vo.Index">
+		delete from T_DEF_INDEX
+		where INDEX_CD = #{indexCd}
+		and SET_CODE =#{setCode}
+	</delete>
+	<delete id="deleteIndexs" parameterType="Map">
+		delete from T_DEF_INDEX where INDEX_CD in
+		<foreach item="item" index="index" collection="indexIds" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<update id="updateIndex" parameterType="sra.param.vo.Index">
+		update T_DEF_INDEX
+		<set>
+			<if test="indexCd != null">INDEX_CD = #{indexCd},</if>
+			<if test="setCode != null">SET_CODE = #{setCode},</if>
+			<if test="startDt != null">START_DT = #{startDt},</if>
+			<if test="indexName != null">INDEX_NAME = #{indexName},</if>
+			<if test="dtTable != null">DT_TABLE = #{dtTable},</if>
+			<if test="calcCircle != null">CALC_CIRCLE = #{calcCircle},</if>
+			<if test="calcOrg != null">CALC_ORG = #{calcOrg},</if>
+			<if test="calcCurry != null">CALC_CURRY = #{calcCurry},</if>
+			<if test="superCd != null">SUPER_CD = #{superCd},</if>
+			<if test="indexDesc != null">INDEX_DESC = #{indexDesc},</if>
+			<if test="dtClear != null">DT_CLEAR = #{dtClear},</if>
+
+			<if test="vcd01 != null">vcd01 = #{vcd01},</if>
+			<if test="vcd02 != null">vcd02 = #{vcd02},</if>
+			<if test="vcd03 != null">vcd03 = #{vcd03},</if>
+			<if test="vcd04 != null">vcd04 = #{vcd04},</if>
+			<if test="vcd05 != null">vcd05 = #{vcd05},</if>
+			<if test="vcd06 != null">vcd06 = #{vcd06},</if>
+			<if test="vcd07 != null">vcd07 = #{vcd07},</if>
+			<if test="vcd08 != null">vcd08 = #{vcd08},</if>
+			<if test="vcd09 != null">vcd09 = #{vcd09},</if>
+			<if test="vcd10 != null">vcd10 = #{vcd10},</if>
+			<if test="vcd11 != null">vcd11 = #{vcd11},</if>
+			<if test="vcd12 != null">vcd12 = #{vcd12},</if>
+			<if test="vcd13 != null">vcd13 = #{vcd13},</if>
+			<if test="vcd14 != null">vcd14 = #{vcd14},</if>
+			<if test="vcd15 != null">vcd15 = #{vcd15},</if>
+
+		</set>
+		where INDEX_CD = #{indexCd}
+		and SET_CODE = #{setCode}
+	</update>
+	<select id="loadIndex" resultType="sra.param.vo.Index"
+		parameterType="sra.param.vo.Index">
+		select
+		INDEX_CD as indexCd,
+		SET_CODE as setCode,
+		convert(datetime,START_DT) as startDt,
+		INDEX_NAME as indexName,
+		DT_TABLE as dtTable,
+		CALC_CIRCLE as calcCircle,
+		CALC_ORG as calcOrg,
+		CALC_CURRY as calcCurry,
+		SUPER_CD as superCd,
+		INDEX_DESC as indexDesc,
+		DT_CLEAR as dtClear,
+		vcd01 as vcd01,
+		vcd02 as vcd02,
+		vcd03 as vcd03,
+		vcd04 as vcd04,
+		vcd05 as vcd05,
+		vcd06 as vcd06,
+		vcd07 as vcd07,
+		vcd08 as vcd08,
+		vcd09 as vcd09,
+		vcd10 as vcd10,
+		vcd11 as vcd11,
+		vcd12 as vcd12,
+		vcd13 as vcd13,
+		vcd14 as vcd14,
+		vcd15 as vcd15
+		from T_DEF_INDEX
+		where INDEX_CD = #{indexCd}
+		and SET_CODE = #{setCode}
+
+	</select>
+	<select id="queryIndexs" resultType="hashMap" parameterType="sra.param.vo.Index"
+		teradataOrderBy="INDEX_CD">
+		select
+		INDEX_CD as indexCd,
+		SET_CODE as setCode,
+		START_DT as startDt,
+		INDEX_NAME as indexName,
+		DT_TABLE as dtTable,
+		CALC_CIRCLE as calcCircle,
+		CALC_ORG as calcOrg,
+		CALC_CURRY as calcCurry,
+		SUPER_CD as superCd,
+		INDEX_DESC as indexDesc,
+		DT_CLEAR as dtClear,
+		vcd01 as vcd01,
+		vcd02 as vcd02,
+		vcd03 as vcd03,
+		vcd04 as vcd04,
+		vcd05 as vcd05,
+		vcd06 as vcd06,
+		vcd07 as vcd07,
+		vcd08 as vcd08,
+		vcd09 as vcd09,
+		vcd10 as vcd10,
+		vcd11 as vcd11,
+		vcd12 as vcd12,
+		vcd13 as vcd13,
+		vcd14 as vcd14,
+		vcd15 as vcd15
+		from T_DEF_INDEX where 1=1
+		<if test="indexCd != null">
+			and INDEX_CD = #{indexCd}
+		</if>
+		<if test="setCode != null">
+			and SET_CODE = #{setCode}
+		</if>
+		<if test="startDt != null">
+			and START_DT = #{startDt}
+		</if>
+		<if test="indexName != null">
+			and INDEX_NAME = #{indexName}
+		</if>
+		<if test="dtTable != null">
+			and DT_TABLE = #{dtTable}
+		</if>
+		<if test="calcCircle != null">
+			and CALC_CIRCLE = #{calcCircle}
+		</if>
+		<if test="calcOrg != null">
+			and CALC_ORG = #{calcOrg}
+		</if>
+		<if test="calcCurry != null">
+			and CALC_CURRY = #{calcCurry}
+		</if>
+		<if test="calcOrder != null">
+			and CALC_ORDER = #{calcOrder}
+		</if>
+		<if test="superCd != null">
+			and SUPER_CD = #{superCd}
+		</if>
+		<if test="indexDesc != null">
+			and INDEX_DESC = #{indexDesc}
+		</if>
+		<if test="dtClear != null">
+			and DT_CLEAR = #{dtClear}
+		</if>
+	</select>
+	<select id="queryIndexsfordown" resultType="hashMap" parameterType="sra.param.vo.Index"
+		teradataOrderBy="INDEX_CD">
+		select
+		INDEX_CD as indexCd,
+		SET_CODE as setCode,
+		START_DT as startDt,
+		INDEX_NAME as indexName,
+		DT_TABLE as dtTable,
+		CALC_CIRCLE as calcCircle,
+		CALC_ORG as calcOrg,
+		CALC_CURRY as calcCurry,
+
+		SUPER_CD as superCd,
+		INDEX_DESC as indexDesc,
+		DT_CLEAR as dtClear,
+		vcd01 as vcd01,
+		vcd02 as vcd02,
+		vcd03 as vcd03,
+		vcd04 as vcd04,
+		vcd05 as vcd05,
+		vcd06 as vcd06,
+		vcd07 as vcd07,
+		vcd08 as vcd08,
+		vcd09 as vcd09,
+		vcd10 as vcd10,
+		vcd11 as vcd11,
+		vcd12 as vcd12,
+		vcd13 as vcd13,
+		vcd14 as vcd14,
+		vcd15 as vcd15
+		from T_DEF_INDEX where 1=1
+		<if test="setCode != null">
+			and SET_CODE = #{setCode}
+		</if>
+		
+	</select>
+	<select id="queryIndexTotal" resultType="hashMap" parameterType="sra.param.vo.Index">
+		select count(1) cnt
+		from T_DEF_INDEX where 1=1
+		<if test="indexCd != null">
+			and INDEX_CD = #{indexCd}
+		</if>
+		<if test="setCode != null">
+			and SET_CODE = #{setCode}
+		</if>
+		<if test="startDt != null">
+			and START_DT = #{startDt}
+		</if>
+		<if test="indexName != null">
+			and INDEX_NAME = #{indexName}
+		</if>
+		<if test="dtTable != null">
+			and DT_TABLE = #{dtTable}
+		</if>
+		<if test="calcCircle != null">
+			and CALC_CIRCLE = #{calcCircle}
+		</if>
+		<if test="calcOrg != null">
+			and CALC_ORG = #{calcOrg}
+		</if>
+		<if test="calcCurry != null">
+			and CALC_CURRY = #{calcCurry}
+		</if>
+		<if test="superCd != null">
+			and SUPER_CD = #{superCd}
+		</if>
+		<if test="indexDesc != null">
+			and INDEX_DESC = #{indexDesc}
+		</if>
+		<if test="dtClear != null">
+			and DT_CLEAR = #{dtClear}
+		</if>
+	</select>
+	<select id="loadIndexTotal" resultType="hashMap" parameterType="sra.param.vo.Index">
+		select count(1) cnt
+		from T_DEF_INDEX where 1=1
+		<if test="indexCd != null">
+			and INDEX_CD = #{indexCd}
+		</if>
+		<if test="setCode != null">
+			and SET_CODE = #{setCode}
+		</if>
+		
+	</select>
+	<!-- 公共参数分页sql -->
+	<select id="queryIndexsforpublic" resultType="hashMap"
+		parameterType="Map" teradataOrderBy="INDEX_CD">
+		select
+		INDEX_CD as indexcd,
+		INDEX_name as indexname,
+		INDEX_desc as indexdesc
+		from T_DEF_INDEX_REF where 1=1
+		<if test="indexcd != null">
+			and INDEX_CD = #{indexcd}
+		</if>
+		<if test="indexname != null">
+			and INDEX_name = #{indexname}
+		</if>
+	</select>
+	<select id="queryIndexTotalforpublic" resultType="hashMap"
+		parameterType="Map">
+		select count(1) cnt
+		from T_DEF_INDEX_REF where 1=1
+		<if test="indexcd != null">
+			and INDEX_CD = #{indexcd}
+		</if>
+		<if test="indexname != null">
+			and INDEX_name = #{indexname}
+		</if>
+		<!-- 公共指标分页完成 -->
+
+	</select>
+	<select id="loadIndexTotalforpublic" resultType="hashMap"
+		parameterType="Map">
+		select count(1) cnt
+		from T_DEF_INDEX_REF where 1=1
+		<if test="indexcd != null">
+			 and  INDEX_CD = #{indexcd}
+		</if>
+<!-- 公共指标分页完成 -->
+
+	</select>
+	<!-- 公共指标的添加 -->
+	<insert id="insertIndexforpublic" parameterType="map">
+		insert into T_DEF_INDEX_REF (INDEX_CD,index_name,index_desc) values
+		(#{indexcd},#{indexname},#{indexdesc})
+	</insert>
+	<!-- 公共指标添加完成 -->
+	<!-- 公共指标的更新 -->
+	<update id="updateIndexforpublic" parameterType="map">
+		update T_DEF_INDEX_REF
+		<set>
+			<if test="indexcd != null">INDEX_CD = #{indexcd},</if>
+			<if test="indexname!= null">index_name = #{indexname},</if>
+			<if test="indexdesc != null">index_desc = #{indexdesc},</if>
+		</set>
+		where INDEX_CD = #{indexcd}
+	</update>
+	<!-- 公共指标更新完成 -->
+	<!-- 删除公共指标 -->
+	<delete id="deleteIndexsforpublic" parameterType="Map">
+		delete from T_DEF_INDEX_REF where INDEX_CD in
+		<foreach item="item" index="index" collection="indexIds" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<select id="loadPublicIndexforindex" resultType="hashMap"
+		parameterType="Map">
+		select  
+		     data_cat as datacat,
+		     data_item as dataitem
+		from T_DEF_INDEX_ITEM where 1=1
+		<if test="indexcd != null">
+			 and  INDEX_CD = #{indexcd}
+		</if>
+		<if test="setcode!=null">
+		   and set_code=#{setcode}
+		</if>
+		</select>
+	<!-- 删除公共指标完成 -->
+	<select id="queryIndexLoads" resultType="hashMap" parameterType="Map">
+		select
+		INDEX_CD as indexCd,
+		SET_CODE as setCode,
+		DATA_CAT as dataCat,
+		DATA_ITEM as
+		dataItem
+		from T_DEF_INDEX_ITEM where 1=1
+		and DATA_ITEM in
+		<foreach item="item" index="index" collection="indexIds" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<select id="queryDatasHostory" resultType="hashMap"
+		parameterType="Map">
+		select
+		DATA_ITEM as dataItem
+		from T_ETL_FILE_ITEM where 1=1
+		and FILE_ID in
+		<foreach item="item" index="index" collection="indexIds" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+	<insert id="insertIndexCalc" parameterType="sra.param.vo.Index">
+		insert into #{dtTable}
+		(ID,INDEX_CD,STAT_DT,ORG_NUM,CURRY_CD,VAL01,VAL02,VAL03,VAL04,VAL05,VAL06,VAL07,VAL08,VAL09,VAL10,VAL11,VAL12,VAL13,VAL14,VAL15)
+		values
+		(#{temp},#{indexCd},#{etlDate},#{calcOrg},#{calcCurry},#{vcd01},#{vcd02},#{vcd03},#{vcd04},#{vcd05},#{vcd06},#{vcd07},#{vcd08},#{vcd09},#{vcd10},#{vcd11},#{vcd12},#{vcd13},#{vcd14},#{vcd15})
+	</insert>
+
+	<insert id="insertIndexItem" parameterType="sra.param.vo.Index">
+		insert into T_DEF_INDEX_ITEM
+		(INDEX_CD,SET_CODE,DATA_CAT,DATA_ITEM) values
+		(#{indexCd},#{setCode},#{etlDate},#{temp})
+	</insert>
+	<delete id="deleteIndexItemforpublic" parameterType="sra.param.vo.Index">
+		delete from T_DEF_INDEX_ITEM
+		where INDEX_CD = #{indexCd}
+		and SET_CODE =#{setCode}
+
+	</delete>
+	<insert id="insertIndexItemforpublic" parameterType="Map">
+		insert into T_DEF_INDEX_ITEM
+		(INDEX_CD,SET_CODE,DATA_CAT,DATA_ITEM) values
+		(#{indexCd},#{setCode},#{etlDate},#{temp})
+	</insert>
+
+	<insert id="insertIndexItemValue" parameterType="sra.param.vo.Index">
+		insert into T_DEF_INDEX_ITEM_VALUE
+		(INDEX_CD,SET_CODE,DATA_CAT,DATA_ITEM) values
+		(#{indexCd},#{setCode},#{etlDate},#{temp})
+	</insert>
+</mapper>

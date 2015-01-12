@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryMtable">
+    <SELECT><![CDATA[
+      SELECT
+        t.PK1 as pk1,
+        t.PK2 as pk2,
+        t.FT_VARCHAR as ftVarchar,
+        t.FT_DATE as ftDate,
+        t.FT_DEC as ftDec,
+        t.FT_INT as ftInt,
+        t.FT_CS as ftCs
+      from T_SYS_MTABLE t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <pk1>and t.PK1 = ?</pk1>
+      <pk2>and t.PK2 = ?</pk2>
+      <ftVarchar>and t.FT_VARCHAR = ?</ftVarchar>
+      <ftDate>and t.FT_DATE = ?</ftDate>
+      <ftDec>and t.FT_DEC = ?</ftDec>
+      <ftInt>and t.FT_INT = ?</ftInt>
+      <ftCs>and t.FT_CS = ?</ftCs>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

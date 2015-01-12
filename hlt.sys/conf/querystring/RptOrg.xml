@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryRptOrg">
+    <SELECT><![CDATA[
+      SELECT
+        t.ORG_NUM as orgNum,
+        t.PARENT_ORG as parentOrg,
+        t.ORG_NAME as orgName,
+        t.AREA_CODE as areaCode,
+        t.ORG_TYPE as orgType,
+        t.UPPER_ORGS as upperOrgs
+      from T_SYS_SET_ORG t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <orgNum>and t.ORG_NUM = ?</orgNum>
+      <parentOrg>and t.PARENT_ORG = ?</parentOrg>
+      <orgName>and t.ORG_NAME = ?</orgName>
+      <areaCode>and t.AREA_CODE = ?</areaCode>
+      <orgType>and t.ORG_TYPE = ?</orgType>
+      <upperOrgs>and t.UPPER_ORGS = ?</upperOrgs>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryRoleMenu">
+    <SELECT><![CDATA[
+      SELECT
+        t.ROLE_CODE as roleCode,
+        t.MENU_CODE as menuCode
+      from T_URM_ROLE_MENU t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <roleCode>and t.ROLE_CODE = ?</roleCode>
+      <menuCode>and t.MENU_CODE = ?</menuCode>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

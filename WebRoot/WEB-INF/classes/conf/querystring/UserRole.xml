@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryUserRole">
+    <SELECT><![CDATA[
+      SELECT
+        t.ROLE_CODE as roleCode,
+        t.USER_ID as userId
+      from T_URM_USER_ROLE t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <roleCode>and t.ROLE_CODE = ?</roleCode>
+      <userId>and t.USER_ID = ?</userId>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

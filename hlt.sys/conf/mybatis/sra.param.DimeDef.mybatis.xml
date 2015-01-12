@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.param">
+  <insert id="insertDimeDef" parameterType="sra.param.vo.DimeDef">
+     insert into T_SYS_DIME_DEF
+       (DIME_CD,DIME_NAME,DATA_TYPE,CODE_STRING,DIME_DESC) values 
+       (#{dimeCd},#{dimeName},#{dataType},#{codeString},#{dimeDesc})
+  </insert>
+  <delete id="deleteDimeDef" parameterType="sra.param.vo.DimeDef">
+     delete from T_SYS_DIME_DEF 
+       where DIME_CD = #{dimeCd} 
+  </delete>
+  <delete id="deleteDimeDefs" parameterType="Map">
+     delete from T_SYS_DIME_DEF where DIME_CD in 
+          <foreach item="item" index="index" collection="dimeDefIds" open="(" separator="," close=")" >
+				#{item}
+		  </foreach>
+  </delete>
+  <update id="updateDimeDef" parameterType="sra.param.vo.DimeDef">
+     update T_SYS_DIME_DEF 
+       <set>
+       <if test="dimeCd != null">DIME_CD = #{dimeCd},</if>
+       <if test="dimeName != null">DIME_NAME = #{dimeName},</if>
+       <if test="dataType != null">DATA_TYPE = #{dataType},</if>
+       <if test="codeString != null">CODE_STRING = #{codeString},</if>
+       <if test="dimeDesc != null">DIME_DESC = #{dimeDesc},</if>
+       </set>
+       where DIME_CD = #{dimeCd} 
+  </update>
+  <select id="loadDimeDef" resultType="sra.param.vo.DimeDef" parameterType="sra.param.vo.DimeDef">
+     select 
+       DIME_CD as dimeCd,
+       DIME_NAME as dimeName,
+       DATA_TYPE as dataType,
+       CODE_STRING as codeString,
+       DIME_DESC as dimeDesc
+     from T_SYS_DIME_DEF 
+     where DIME_CD = #{dimeCd} 
+  </select>
+  <select id="queryDimeDefs" resultType="hashMap" parameterType="sra.param.vo.DimeDef"  teradataOrderBy="DIME_CD">
+     select 
+       DIME_CD as dimeCd,
+       DIME_NAME as dimeName,
+       DATA_TYPE as dataType,
+       CODE_STRING as codeString,
+       DIME_DESC as dimeDesc
+     from T_SYS_DIME_DEF where 1=1 
+       <if test="dimeCd != null"> 
+ and DIME_CD = #{dimeCd} 
+ </if>
+       <if test="dimeName != null"> 
+ and DIME_NAME = #{dimeName} 
+ </if>
+       <if test="dataType != null"> 
+ and DATA_TYPE = #{dataType} 
+ </if>
+       <if test="codeString != null"> 
+ and CODE_STRING = #{codeString} 
+ </if>
+       <if test="dimeDesc != null"> 
+ and DIME_DESC = #{dimeDesc} 
+ </if>
+  </select>
+  <select id="queryDimeDefTotal" resultType="hashMap" parameterType="sra.param.vo.DimeDef">
+     select count(1) cnt 
+     from T_SYS_DIME_DEF where 1=1 
+       <if test="dimeCd != null"> 
+ and DIME_CD = #{dimeCd} 
+ </if>
+       <if test="dimeName != null"> 
+ and DIME_NAME = #{dimeName} 
+ </if>
+       <if test="dataType != null"> 
+ and DATA_TYPE = #{dataType} 
+ </if>
+       <if test="codeString != null"> 
+ and CODE_STRING = #{codeString} 
+ </if>
+       <if test="dimeDesc != null"> 
+ and DIME_DESC = #{dimeDesc} 
+ </if>
+  </select>
+</mapper>

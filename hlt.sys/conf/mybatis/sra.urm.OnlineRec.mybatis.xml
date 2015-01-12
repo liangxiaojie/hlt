@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.urm">
+  <insert id="insertOnlineRec" parameterType="sra.urm.vo.OnlineRec">
+     insert into T_URM_ONLINE_REC
+       (USER_ID,IS_ONLINE,ONLINE_TIME,OFFLINE_TIME) values 
+       (#{userId},#{isOnline},#{onlineTime},#{offlineTime})
+  </insert>
+  <delete id="deleteOnlineRec" parameterType="sra.urm.vo.OnlineRec">
+     delete from T_URM_ONLINE_REC 
+       where USER_ID = #{userId} 
+          and IS_ONLINE = #{isOnline} 
+          and ONLINE_TIME = #{onlineTime} 
+          and OFFLINE_TIME = #{offlineTime} 
+  </delete>
+  <update id="updateOnlineRec" parameterType="sra.urm.vo.OnlineRec">
+     update T_URM_ONLINE_REC 
+       <set>
+       <if test="userId != null">USER_ID = #{userId},</if>
+       <if test="isOnline != null">IS_ONLINE = #{isOnline},</if>
+       <if test="onlineTime != null">ONLINE_TIME = #{onlineTime},</if>
+       <if test="offlineTime != null">OFFLINE_TIME = #{offlineTime},</if>
+       </set>
+       where USER_ID = #{userId} 
+          and IS_ONLINE = #{isOnline} 
+          and ONLINE_TIME = #{onlineTime} 
+          and OFFLINE_TIME = #{offlineTime} 
+  </update>
+  <select id="loadOnlineRec" resultType="sra.urm.vo.OnlineRec" parameterType="sra.urm.vo.OnlineRec">
+     select 
+       USER_ID as userId,
+       IS_ONLINE as isOnline,
+       ONLINE_TIME as onlineTime,
+       OFFLINE_TIME as offlineTime
+     from T_URM_ONLINE_REC 
+     where USER_ID = #{userId} 
+        and IS_ONLINE = #{isOnline} 
+        and ONLINE_TIME = #{onlineTime} 
+        and OFFLINE_TIME = #{offlineTime} 
+  </select>
+</mapper>

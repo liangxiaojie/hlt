@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryMyMenu">
+    <SELECT><![CDATA[
+      SELECT
+        t.USER_ID as userId,
+        t.MENU_CODE as menuCode,
+        t.MENU_ORDER as menuOrder
+      from T_URM_MY_MENU t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <userId>and t.USER_ID = ?</userId>
+      <menuCode>and t.MENU_CODE = ?</menuCode>
+      <menuOrder>and t.MENU_ORDER = ?</menuOrder>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

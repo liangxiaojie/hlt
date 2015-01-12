@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryDept">
+    <SELECT><![CDATA[
+      SELECT
+        t.DEPT_ID as deptId,
+        t.PARENT_DEPT as parentDept,
+        t.DEPT_NAME as deptName,
+        t.DEPT_DESC as deptDesc,
+        t.SHOW_ORDER as showOrder
+      from T_URM_DEPT t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <deptId>and t.DEPT_ID = ?</deptId>
+      <parentDept>and t.PARENT_DEPT = ?</parentDept>
+      <deptName>and t.DEPT_NAME = ?</deptName>
+      <deptDesc>and t.DEPT_DESC = ?</deptDesc>
+      <showOrder>and t.SHOW_ORDER = ?</showOrder>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

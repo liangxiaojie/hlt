@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.urm">
+  <insert id="insertCodeItem" parameterType="sra.param.vo.CodeItem">
+     insert into T_SYS_CODE_ITEM
+       (CAT_CODE,ITEM_CODE,ITEM_NAME,ITEM_SEQ,UPPER_CODE,ITEM_MEMO) values 
+       (#{catCode},#{itemCode},#{itemName},#{itemSeq},#{upperCode},#{itemMemo})
+  </insert>
+  <delete id="deleteCodeItem" parameterType="sra.param.vo.CodeItem">
+     delete from T_SYS_CODE_ITEM 
+       where CAT_CODE = #{catCode} 
+          and ITEM_CODE = #{itemCode} 
+  </delete>
+  <delete id="deleteItemsByCat" parameterType="sra.param.vo.CodeItem">
+     delete from T_SYS_CODE_ITEM 
+       where CAT_CODE = #{catCode} 
+  </delete>
+  <update id="updateCodeItem" parameterType="sra.param.vo.CodeItem">
+     update T_SYS_CODE_ITEM 
+       <set>
+       <if test="catCode != null">CAT_CODE = #{catCode},</if>
+       <if test="itemCode != null">ITEM_CODE = #{itemCode},</if>
+       <if test="itemName != null">ITEM_NAME = #{itemName},</if>
+       <if test="itemSeq != null">ITEM_SEQ = #{itemSeq},</if>
+       <if test="upperCode != null">UPPER_CODE = #{upperCode},</if>
+       <if test="itemMemo != null">ITEM_MEMO = #{itemMemo},</if>
+       </set>
+       where CAT_CODE = #{catCode} 
+          and ITEM_CODE = #{itemCode} 
+  </update>
+  <select id="loadCodeItem" resultType="sra.param.vo.CodeItem" parameterType="sra.param.vo.CodeItem">
+     select 
+       CAT_CODE as catCode,
+       ITEM_CODE as itemCode,
+       ITEM_NAME as itemName,
+       ITEM_SEQ as itemSeq,
+       UPPER_CODE as upperCode,
+       ITEM_MEMO as itemMemo
+     from T_SYS_CODE_ITEM 
+     where CAT_CODE = #{catCode} 
+        and ITEM_CODE = #{itemCode} 
+  </select>
+  <select id="queryCodeItems" resultType="sra.param.vo.CodeItem" parameterType="hashMap" flushCache="false" useCache="false" >
+     select 
+       CAT_CODE as catCode,
+       ITEM_CODE as itemCode,
+       ITEM_NAME as itemName,
+       ITEM_SEQ as itemSeq,
+       UPPER_CODE as upperCode,
+       ITEM_MEMO as itemMemo
+     from T_SYS_CODE_ITEM where 1=1 
+       <if test="catCode != null"> 
+ and CAT_CODE = #{catCode} 
+ </if>
+       <if test="itemCode != null"> 
+ and ITEM_CODE = #{itemCode} 
+ </if>
+       <if test="itemName != null"> 
+ and ITEM_NAME like #{itemName} 
+ </if>
+       <if test="itemSeq != null"> 
+ and ITEM_SEQ = #{itemSeq} 
+ </if>
+       <if test="upperCode != null"> 
+ and UPPER_CODE = #{upperCode} 
+ </if>
+       <if test="itemMemo != null"> 
+ and ITEM_MEMO = #{itemMemo} 
+ </if>
+  </select>
+  <select id="queryCodeItemsfortree" resultType="sra.param.vo.CodeItem" parameterType="hashMap" flushCache="false" useCache="false" >
+     select 
+       CAT_CODE as catCode,
+       ITEM_CODE as c,
+       ITEM_NAME as n,
+       ITEM_SEQ as itemSeq,
+       UPPER_CODE as upperCode,
+       ITEM_MEMO as itemMemo
+     from T_SYS_CODE_ITEM where 1=1 
+       <if test="catCode != null"> 
+ and CAT_CODE = #{catCode} 
+ </if>
+  </select>
+  <select id="queryCodeItemBases" resultType="sra.param.vo.CodeItemBase" parameterType="Map" flushCache="false" useCache="false">
+     select 
+       CAT_CODE as catCode,
+       ITEM_CODE as itemCode,
+       ITEM_NAME as itemName,
+       ITEM_SEQ as itemSeq,
+       UPPER_CODE as upperCode,
+       ITEM_MEMO as itemMemo
+     from T_SYS_CODE_ITEM where 1=1 
+       <if test="catCode != null"> 
+ and CAT_CODE = #{catCode} 
+ </if>
+       <if test="itemCode != null"> 
+ and ITEM_CODE = #{itemCode} 
+ </if>
+       <if test="itemName != null"> 
+ and ITEM_NAME like #{itemName} 
+ </if>
+       <if test="itemSeq != null"> 
+ and ITEM_SEQ = #{itemSeq} 
+ </if>
+       <if test="upperCode != null"> 
+ and UPPER_CODE = #{upperCode} 
+ </if>
+       <if test="itemMemo != null"> 
+ and ITEM_MEMO = #{itemMemo} 
+ </if>
+  </select>
+  <select id="queryCodeItemTotal" resultType="sra.param.vo.CodeItem" parameterType="map">
+     select count(1) cnt 
+     from T_SYS_CODE_ITEM where 1=1 
+       <if test="catCode != null"> 
+ and CAT_CODE = #{catCode} 
+ </if>
+       <if test="itemCode != null"> 
+ and ITEM_CODE = #{itemCode} 
+ </if>
+       <if test="itemName != null"> 
+ and ITEM_NAME = #{itemName} 
+ </if>
+       <if test="itemSeq != null"> 
+ and ITEM_SEQ = #{itemSeq} 
+ </if>
+       <if test="upperCode != null"> 
+ and UPPER_CODE = #{upperCode} 
+ </if>
+       <if test="itemMemo != null"> 
+ and ITEM_MEMO = #{itemMemo} 
+ </if>
+  </select>
+</mapper>

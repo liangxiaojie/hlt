@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.urm.RptOrg">
+  <insert id="insertRptOrg" parameterType="sra.urm.vo.RptOrg">
+     insert into T_SYS_SET_ORG
+       (ORG_NUM,PARENT_ORG,ORG_NAME,AREA_CODE,ORG_TYPE,UPPER_ORGS) values 
+       (#{orgNum},#{parentOrg},#{orgName},#{areaCode},#{orgType},#{upperOrgs})
+  </insert>
+  
+  <delete id="deleteRptOrgs" parameterType="Map">
+	delete from T_SYS_SET_ORG where ORG_NUM in 
+	<foreach item="item" index="index" collection="rptOrgCodes" open="(" separator="," close=")" >
+		#{item}		
+	</foreach>
+	</delete>
+  <update id="updateRptOrg" parameterType="sra.urm.vo.RptOrg">
+     update T_SYS_SET_ORG 
+       <set>
+       <if test="orgNum != null">ORG_NUM = #{orgNum},</if>
+       <if test="parentOrg != null">PARENT_ORG = #{parentOrg},</if>
+       <if test="orgName != null">ORG_NAME = #{orgName},</if>
+       <if test="areaCode != null">AREA_CODE = #{areaCode},</if>
+       <if test="orgType != null">ORG_TYPE = #{orgType},</if>
+       <if test="upperOrgs != null">UPPER_ORGS = #{upperOrgs},</if>
+       </set>
+       where ORG_NUM = #{orgNum} 
+  </update>
+  <select id="loadRptOrg" resultType="sra.urm.vo.RptOrg" parameterType="sra.urm.vo.RptOrg">
+     select 
+       ORG_NUM as orgNum,
+       PARENT_ORG as parentOrg,
+       ORG_NAME as orgName,
+       AREA_CODE as areaCode,
+       ORG_TYPE as orgType,
+       UPPER_ORGS as upperOrgs
+     from T_SYS_SET_ORG 
+     where ORG_NUM = #{orgNum} 
+  </select>
+  <select id="loadAllRptOrg" resultType="sra.urm.vo.RptOrgBase">
+     select 
+       ORG_NUM as orgNum,
+       PARENT_ORG as parentOrg,
+       ORG_NAME as orgName,
+       AREA_CODE as areaCode,
+       ORG_TYPE as orgType,
+       UPPER_ORGS as upperOrgs
+     from T_SYS_SET_ORG 
+  </select>
+  
+  <select id="queryRptOrgs" resultType="sra.urm.vo.RptOrg" parameterType="sra.urm.vo.RptOrg" teradataOrderBy="ORG_NUM">
+     select 
+       ORG_NUM as orgNum,
+       PARENT_ORG as parentOrg,
+       ORG_NAME as orgName,
+       AREA_CODE as areaCode,
+       ORG_TYPE as orgType,
+       UPPER_ORGS as upperOrgs
+     	from T_SYS_SET_ORG where 1=1 
+       <if test="orgNum != null"> 
+	 and ORG_NUM = #{orgNum} 
+	 </if>
+	       <if test="parentOrg != null"> 
+	 and PARENT_ORG = #{parentOrg} 
+	 </if>
+	       <if test="orgName != null"> 
+	 and ORG_NAME like #{orgName} 
+	 </if>
+	       <if test="areaCode != null"> 
+	 and AREA_CODE = #{areaCode} 
+	 </if>
+	       <if test="orgType != null"> 
+	 and ORG_TYPE = #{orgType} 
+	 </if>
+	       <if test="upperOrgs != null"> 
+	 and UPPER_ORGS = #{upperOrgs} 
+	 </if>
+	  </select>
+	<select id="queryRptOrgTotal" resultType="hashMap" parameterType="sra.urm.vo.RptOrg">
+	     select count(1) cnt 
+	     from T_SYS_SET_ORG where 1=1 
+	       <if test="orgNum != null"> 
+		 and ORG_NUM = #{orgNum} 
+		 </if>
+		       <if test="parentOrg != null"> 
+		 and PARENT_ORG = #{parentOrg} 
+		 </if>
+		       <if test="orgName != null"> 
+		 and ORG_NAME = #{orgName} 
+		 </if>
+		       <if test="areaCode != null"> 
+		 and AREA_CODE = #{areaCode} 
+		 </if>
+		       <if test="orgType != null"> 
+		 and ORG_TYPE = #{orgType} 
+		 </if>
+		       <if test="upperOrgs != null"> 
+		 and UPPER_ORGS = #{upperOrgs} 
+		 </if>
+  </select>
+  
+</mapper>

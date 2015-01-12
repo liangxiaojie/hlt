@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryCodeItem">
+    <SELECT><![CDATA[
+      SELECT
+        t.CAT_CODE as catCode,
+        t.ITEM_CODE as itemCode,
+        t.ITEM_NAME as itemName,
+        t.ITEM_SEQ as itemSeq,
+        t.UPPER_CODE as upperCode,
+        t.ITEM_MEMO as itemMemo
+      from T_SYS_CODE_ITEM t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <catCode>and t.CAT_CODE = ?</catCode>
+      <itemCode>and t.ITEM_CODE = ?</itemCode>
+      <itemName>and t.ITEM_NAME = ?</itemName>
+      <itemSeq>and t.ITEM_SEQ = ?</itemSeq>
+      <upperCode>and t.UPPER_CODE = ?</upperCode>
+      <itemMemo>and t.ITEM_MEMO = ?</itemMemo>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

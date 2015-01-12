@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.param">
+  <insert id="insertFileMapping" parameterType="map">
+     insert into T_ETL_FILE_MAPPING
+       (FILE_NAME,TO_TABLE,PK_STR,COLUMN_CODES,COLUMN_NAMES) values 
+       (#{fileName},#{toTable},#{pkStr},#{columnCodes},#{columnNames})
+  </insert>
+  <delete id="deleteFileMapping" parameterType="map">
+     delete from T_ETL_FILE_MAPPING where FILE_NAME = #{fileName} 
+  </delete>
+  <update id="updateFileMapping" parameterType="map">
+     update T_ETL_FILE_MAPPING 
+       <set>
+       <if test="toTable != null">TO_TABLE = #{toTable},</if>
+       <if test="pkStr != null">PK_STR = #{pkStr},</if>
+       <if test="columnCodes != null">COLUMN_CODES = #{columnCodes},</if>
+       <if test="columnNames != null">COLUMN_NAMES = #{columnNames},</if>
+       </set>
+       where FILE_NAME = #{fileName} 
+  </update>
+  <select id="loadFileMapping" resultType="map" parameterType="map">
+     select 
+       FILE_NAME as fileName,
+       TO_TABLE as toTable,
+       PK_STR as pkStr,
+       COLUMN_CODES as columnCodes,
+       COLUMN_NAMES as columnNames
+     from T_ETL_FILE_MAPPING 
+     where FILE_NAME = #{fileName} 
+  </select>
+  <select id="queryFileMapping" resultType="map" parameterType="map"  teradataOrderBy="FILE_NAME">
+     select 
+       FILE_NAME as fileName,
+       TO_TABLE as toTable,
+       PK_STR as pkStr,
+       COLUMN_CODES as columnCodes,
+       COLUMN_NAMES as columnNames
+     from T_ETL_FILE_MAPPING where 1=1 
+       <if test="fileName != null">and FILE_NAME = #{fileName}</if>
+       <if test="toTable != null">and TO_TABLE = #{toTable}</if>
+       <if test="pkStr != null">and PK_STR = #{pkStr}</if>
+       <if test="columnCodes != null">and COLUMN_CODES = #{columnCodes}</if>
+       <if test="columnNames != null">and COLUMN_NAMES = #{columnNames}</if>
+  </select>
+  <select id="queryFileMappingTotal" resultType="map" parameterType="map">
+     select count(1) cnt 
+     from T_ETL_FILE_MAPPING where 1=1 
+       <if test="fileName != null">and FILE_NAME = #{fileName}</if>
+       <if test="toTable != null">and TO_TABLE = #{toTable}</if>
+       <if test="pkStr != null">and PK_STR = #{pkStr}</if>
+       <if test="columnCodes != null">and COLUMN_CODES = #{columnCodes}</if>
+       <if test="columnNames != null">and COLUMN_NAMES = #{columnNames}</if>
+  </select>
+</mapper>

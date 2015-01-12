@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryOnlineRec">
+    <SELECT><![CDATA[
+      SELECT
+        t.USER_ID as userId,
+        t.IS_ONLINE as isOnline,
+        t.ONLINE_TIME as onlineTime,
+        t.OFFLINE_TIME as offlineTime
+      from T_URM_ONLINE_REC t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <userId>and t.USER_ID = ?</userId>
+      <isOnline>and t.IS_ONLINE = ?</isOnline>
+      <onlineTime>and t.ONLINE_TIME = ?</onlineTime>
+      <offlineTime>and t.OFFLINE_TIME = ?</offlineTime>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

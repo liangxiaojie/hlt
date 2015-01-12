@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING DAO="Login">
+
+
+	<QUERY_STRING METHOD="queryUser">
+		<SELECT><![CDATA[
+        select 
+          t.USER_ID as userId,
+          t.USER_PWD as userPwd,
+          t.USER_NAME as userName,
+         -- t.USER_ORG as userOrg,
+         -- t.UCENTER_ID as ucenterId,
+          '' as userTel
+         from T_URM_USER t
+    ]]></SELECT>
+		<WHERE>
+			<userId>and t.USER_ID = ? </userId>
+			<password>and t.PASSWORD = ? </password>
+		</WHERE>
+	</QUERY_STRING>
+
+	<QUERY_STRING METHOD="queryMyMenu">
+		<SELECT><![CDATA[
+			SELECT setCode,menuCode,menuName,parentCode,menuUrl,menuOrder,extConfig,menuDesc FROM (
+			  SELECT distinct 
+			    ''             as setCode,
+			    m.MENU_CODE    as menuCode,
+			    m.MENU_NAME    as menuName,
+			    m.PARENT_CODE  as parentCode,
+			    m.MENU_URL     as menuUrl,
+			    m.MENU_ORDER   as menuOrder,
+			    m.EXT_CONFIG   as extConfig,
+			    m.MENU_DESC    as menuDesc
+			   FROM T_URM_ROLE_MENU rm
+			   join T_URM_USER_ROLE ur on (rm.ROLE_CODE = ur.ROLE_CODE or rm.ROLE_CODE= 'GUEST')
+			   join T_URM_USER u on u.USER_ID = ur.USER_ID
+			   join T_URM_MENU m on rm.MENU_CODE = m.MENU_CODE
+			  where u.USER_ID = ? 
+			              			  
+			) as m
+			order by menuOrder
+    ]]></SELECT>
+		<PARAMETERS>userId</PARAMETERS>
+		<WHERE>
+		</WHERE>
+	</QUERY_STRING>
+
+	<QUERY_STRING METHOD="queryMyFavMenu">
+		<SELECT><![CDATA[
+            SELECT distinct 
+                m.MENU_CODE    as menuCode,
+                m.MENU_NAME    as menuName,
+                m.MENU_URL     as menuUrl,
+                m.EXT_CONFIG   as extConfig,
+                mm.MENU_ORDER  as menuOrder
+              FROM T_URM_MY_MENU mm
+              join T_URM_MENU m on mm.MENU_CODE = m.MENU_CODE
+              join T_URM_ROLE_MENU rm on rm.MENU_CODE = mm.MENU_CODE
+              join T_URM_USER_ROLE ur on rm.ROLE_CODE = ur.ROLE_CODE and ur.USER_ID = mm.USER_ID
+             where mm.USER_ID = ?
+             ORDER BY mm.MENU_ORDER
+        ]]></SELECT>
+		<PARAMETERS>userId</PARAMETERS>
+		<WHERE>
+		</WHERE>
+	</QUERY_STRING>
+
+</QUERY_STRING>
+
+
+

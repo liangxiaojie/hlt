@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.urm">
+  <insert id="insertMyMenu" parameterType="sra.urm.vo.MyMenu">
+     insert into T_URM_MY_MENU
+       (USER_ID,MENU_CODE,MENU_ORDER) values 
+       (#{userId},#{menuCode},#{menuOrder})
+  </insert>
+  <delete id="deleteMyMenu" parameterType="sra.urm.vo.MyMenu">
+     delete from T_URM_MY_MENU 
+       where USER_ID = #{userId} 
+          and MENU_CODE = #{menuCode} 
+  </delete>
+  <update id="updateMyMenu" parameterType="sra.urm.vo.MyMenu">
+     update T_URM_MY_MENU 
+       <set>
+       <if test="userId != null">USER_ID = #{userId},</if>
+       <if test="menuCode != null">MENU_CODE = #{menuCode},</if>
+       <if test="menuOrder != null">MENU_ORDER = #{menuOrder},</if>
+       </set>
+       where USER_ID = #{userId} 
+          and MENU_CODE = #{menuCode} 
+  </update>
+  <select id="loadMyMenu" resultType="sra.urm.vo.MyMenu" parameterType="sra.urm.vo.MyMenu">
+     select 
+       USER_ID as userId,
+       MENU_CODE as menuCode,
+       MENU_ORDER as menuOrder
+     from T_URM_MY_MENU 
+     where USER_ID = #{userId} 
+        and MENU_CODE = #{menuCode} 
+  </select>
+</mapper>

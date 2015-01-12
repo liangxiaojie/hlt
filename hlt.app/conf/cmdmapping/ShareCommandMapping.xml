@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="gb2312"?>
+<CommandMapping>
+
+  <!--comm.begin-->
+  <module name="comm">
+    <mapping path="/download.do"  command="com.cmbc.edw.web.cmd.impl.DownloadCommand" />    
+    <mapping path="/forward.do"   command="com.cmbc.edw.web.cmd.impl.ForwardCommand" />
+    <!-- <mapping path="/login.do"   command="hlt.app.web.LoginCommand" /> -->
+    
+  </module>  
+  
+</CommandMapping>

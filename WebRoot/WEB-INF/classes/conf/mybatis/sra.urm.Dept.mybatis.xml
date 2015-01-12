@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.urm">
+  <insert id="insertDept" parameterType="sra.urm.vo.Dept">
+     insert into T_URM_DEPT
+       (DEPT_ID,PARENT_DEPT,DEPT_NAME,DEPT_DESC,SHOW_ORDER) values 
+       (#{deptId},#{parentDept},#{deptName},#{deptDesc},#{showOrder})
+  </insert>
+  <delete id="deleteDept" parameterType="sra.urm.vo.Dept">
+     delete from T_URM_DEPT 
+       where DEPT_ID = #{deptId} 
+  </delete>
+  <delete id="deleteDepts" parameterType="Map">
+     delete from T_URM_DEPT 
+       where DEPT_ID IN
+       <foreach item="item" index="index" collection="deptIds" open="(" separator="," close=")" >
+			#{item}		
+			</foreach> 
+  </delete>
+  <update id="updateDept" parameterType="sra.urm.vo.Dept">
+     update T_URM_DEPT 
+       <set>
+       <if test="deptId != null">DEPT_ID = #{deptId},</if>
+       <if test="parentDept != null">PARENT_DEPT = #{parentDept},</if>
+       <if test="deptName != null">DEPT_NAME = #{deptName},</if>
+       <if test="deptDesc != null">DEPT_DESC = #{deptDesc},</if>
+       <if test="showOrder != null">SHOW_ORDER = #{showOrder},</if>
+       </set>
+       where DEPT_ID = #{deptId} 
+  </update>
+  
+  <select id="loadDept" resultType="sra.urm.vo.Dept" parameterType="sra.urm.vo.Dept">
+     select 
+       DEPT_ID as deptId,
+       PARENT_DEPT as parentDept,
+       DEPT_NAME as deptName,
+       DEPT_DESC as deptDesc,
+       SHOW_ORDER as showOrder
+     from T_URM_DEPT 
+     where DEPT_ID = #{deptId} 
+  </select>
+  <select id="queryDepts" resultType="sra.urm.vo.Dept" parameterType="sra.urm.vo.Dept" teradataOrderBy="SHOW_ORDER">
+     select 
+       DEPT_ID as deptId,
+       PARENT_DEPT as parentDept,
+       DEPT_NAME as deptName,
+       DEPT_DESC as deptDesc,
+       SHOW_ORDER as showOrder
+     from T_URM_DEPT where 1=1 
+     ORDER BY SHOW_ORDER
+       <if test="deptId != null"> 
+ and DEPT_ID = #{deptId} 
+ </if>
+       <if test="parentDept != null"> 
+ and PARENT_DEPT = #{parentDept} 
+ </if>
+       <if test="deptName != null"> 
+ and DEPT_NAME LIKE #{deptName} 
+ </if>
+       <if test="deptDesc != null"> 
+ and DEPT_DESC = #{deptDesc} 
+ </if>
+ 	   <if test="showOrder != null">
+ and SHOW_ORDER = #{showOrder}
+ </if>
+  </select>
+  <select id="queryDeptTotal" resultType="hashMap" parameterType="sra.urm.vo.Dept">
+     select count(1) cnt 
+     from T_URM_DEPT where 1=1 
+       <if test="deptId != null"> 
+ and DEPT_ID = #{deptId} 
+ </if>
+       <if test="parentDept != null"> 
+ and PARENT_DEPT = #{parentDept} 
+ </if>
+       <if test="deptName != null"> 
+ and DEPT_NAME = #{deptName} 
+ </if>
+       <if test="deptDesc != null"> 
+ and DEPT_DESC = #{deptDesc} 
+ </if>
+ 	   <if test="showOrder != null">
+ and SHOW_ORDER = #{showOrder}
+ </if>
+  </select>
+ <!-- 部门关联分解表,部门视图中,只显示参与部门 -->
+ <select id="getDepts" resultType="sra.urm.vo.Dept" parameterType="String">
+       select  
+       a.DEPT_ID as deptId ,
+       b.DEPT_NAME as deptName,
+       b.DEPT_DESC as deptDesc,
+       b.PARENT_DEPT as parentDept,
+       b.SHOW_ORDER as showOrder
+       from T_RT_SET_DEPT a join T_URM_DEPT b  on a.DEPT_ID = b.DEPT_ID  
+       where  a.DEPT_ROLE ='R' and  a.SET_CODE = #{setCode} 
+       
+ </select>
+ 
+ <!-- 通过部门ID查询部门名称 -->
+  <select id='getDeptName' resultType="sra.urm.vo.Dept" parameterType="String">
+ 	select 
+		
+		PARENT_DEPT as parentDept,
+		DEPT_NAME as deptName,
+		DEPT_DESC as deptDesc
+		from T_URM_DEPT where DEPT_ID = #{deptId} 
+ </select>
+
+</mapper>

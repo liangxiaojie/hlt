@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryDeptUser">
+    <SELECT><![CDATA[
+      SELECT
+        t.DEPT_ID as deptId,
+        t.USER_ID as userId,
+        t.IS_MANAGER as isManager
+      from T_URM_DEPT_USER t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <deptId>and t.DEPT_ID = ?</deptId>
+      <userId>and t.USER_ID = ?</userId>
+      <isManager>and t.IS_MANAGER = ?</isManager>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

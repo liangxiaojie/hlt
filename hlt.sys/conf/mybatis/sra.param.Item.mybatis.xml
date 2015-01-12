@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.param">
+  <insert id="insertItem" parameterType="sra.param.vo.Item">
+     insert into T_DEF_ITEM
+       (ITEM_CD,ITEM_NAME,START_DT,ITEM_DESC) values 
+       (#{itemCd},#{itemName},#{startDt},#{itemDesc})
+  </insert>
+  <delete id="deleteItem" parameterType="sra.param.vo.Item">
+     delete from T_DEF_ITEM 
+       where ITEM_CD = #{itemCd} 
+  </delete>
+  <delete id="deleteItems" parameterType="Map">
+     delete from T_DEF_ITEM where ITEM_CD in 
+          <foreach item="item" index="index" collection="itemIds" open="(" separator="," close=")" >
+				#{item}
+		  </foreach>
+  </delete>
+  <update id="updateItem" parameterType="sra.param.vo.Item">
+     update T_DEF_ITEM 
+       <set>
+       <if test="itemCd != null">ITEM_CD = #{itemCd},</if>
+       <if test="itemName != null">ITEM_NAME = #{itemName},</if>
+       <if test="startDt != null">START_DT = #{startDt},</if>
+       <if test="itemDesc != null">ITEM_DESC = #{itemDesc},</if>
+       </set>
+       where ITEM_CD = #{itemCd} 
+  </update>
+  <select id="loadItem" resultType="sra.param.vo.Item" parameterType="sra.param.vo.Item">
+     select 
+       ITEM_CD as itemCd,
+       ITEM_NAME as itemName,
+       START_DT as startDt,
+       ITEM_DESC as itemDesc
+     from T_DEF_ITEM 
+     where ITEM_CD = #{itemCd} 
+  </select>
+  <select id="queryItems" resultType="hashMap" parameterType="sra.param.vo.Item"  teradataOrderBy="ITEM_CD">
+     select 
+       ITEM_CD as itemCd,
+       ITEM_NAME as itemName,
+       START_DT as startDt,
+       ITEM_DESC as itemDesc
+     from T_DEF_ITEM where 1=1 
+       <if test="itemCd != null"> 
+ and ITEM_CD = #{itemCd} 
+ </if>
+       <if test="itemName != null"> 
+ and ITEM_NAME like #{itemName} 
+ </if>
+       <if test="startDt != null"> 
+ and START_DT = #{startDt} 
+ </if>
+       <if test="itemDesc != null"> 
+ and ITEM_DESC = #{itemDesc} 
+ </if>
+  </select>
+  <select id="queryItemTotal" resultType="hashMap" parameterType="sra.param.vo.Item">
+     select count(1) cnt 
+     from T_DEF_ITEM where 1=1 
+       <if test="itemCd != null"> 
+ and ITEM_CD = #{itemCd} 
+ </if>
+       <if test="itemName != null"> 
+ and ITEM_NAME = #{itemName} 
+ </if>
+       <if test="startDt != null"> 
+ and START_DT = #{startDt} 
+ </if>
+       <if test="itemDesc != null"> 
+ and ITEM_DESC = #{itemDesc} 
+ </if>
+  </select>
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QUERY_STRING>
+  <QUERY_STRING METHOD="queryRowset">
+    <SELECT><![CDATA[
+      SELECT
+        t.RS_CD as rsCd,
+        t.RS_NAME as rsName,
+        t.RS_DESC as rsDesc,
+        t.VCD01 as vcd01,
+        t.VCD02 as vcd02,
+        t.VCD03 as vcd03,
+        t.VCD04 as vcd04,
+        t.VCD05 as vcd05,
+        t.VCD06 as vcd06,
+        t.VCD07 as vcd07,
+        t.VCD08 as vcd08,
+        t.VCD09 as vcd09,
+        t.VCD10 as vcd10,
+        t.VCD11 as vcd11,
+        t.VCD12 as vcd12,
+        t.VCD13 as vcd13,
+        t.VCD14 as vcd14,
+        t.VCD15 as vcd15,
+        t.DCD01 as dcd01,
+        t.DCD02 as dcd02,
+        t.DCD03 as dcd03,
+        t.DCD04 as dcd04,
+        t.DCD05 as dcd05,
+        t.DCD06 as dcd06,
+        t.DCD07 as dcd07,
+        t.DCD08 as dcd08,
+        t.DCD09 as dcd09,
+        t.DCD10 as dcd10
+      from T_DEF_ROWSET t 
+    ]]></SELECT>
+    <PARAMETERS></PARAMETERS>
+    <WHERE>
+      <rsCd>and t.RS_CD = ?</rsCd>
+      <rsName>and t.RS_NAME = ?</rsName>
+      <rsDesc>and t.RS_DESC = ?</rsDesc>
+      <vcd01>and t.VCD01 = ?</vcd01>
+      <vcd02>and t.VCD02 = ?</vcd02>
+      <vcd03>and t.VCD03 = ?</vcd03>
+      <vcd04>and t.VCD04 = ?</vcd04>
+      <vcd05>and t.VCD05 = ?</vcd05>
+      <vcd06>and t.VCD06 = ?</vcd06>
+      <vcd07>and t.VCD07 = ?</vcd07>
+      <vcd08>and t.VCD08 = ?</vcd08>
+      <vcd09>and t.VCD09 = ?</vcd09>
+      <vcd10>and t.VCD10 = ?</vcd10>
+      <vcd11>and t.VCD11 = ?</vcd11>
+      <vcd12>and t.VCD12 = ?</vcd12>
+      <vcd13>and t.VCD13 = ?</vcd13>
+      <vcd14>and t.VCD14 = ?</vcd14>
+      <vcd15>and t.VCD15 = ?</vcd15>
+      <dcd01>and t.DCD01 = ?</dcd01>
+      <dcd02>and t.DCD02 = ?</dcd02>
+      <dcd03>and t.DCD03 = ?</dcd03>
+      <dcd04>and t.DCD04 = ?</dcd04>
+      <dcd05>and t.DCD05 = ?</dcd05>
+      <dcd06>and t.DCD06 = ?</dcd06>
+      <dcd07>and t.DCD07 = ?</dcd07>
+      <dcd08>and t.DCD08 = ?</dcd08>
+      <dcd09>and t.DCD09 = ?</dcd09>
+      <dcd10>and t.DCD10 = ?</dcd10>
+    </WHERE>
+  </QUERY_STRING>
+</QUERY_STRING>

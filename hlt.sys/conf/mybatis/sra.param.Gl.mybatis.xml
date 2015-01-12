@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sra.param">
+  <insert id="insertGl" parameterType="sra.param.vo.Gl">
+     insert into T_DEF_GL
+       (GL_CD,GL_LEVEL,SUPER_CD,GL_NAME,BAL_DIR,START_DT) values 
+       (#{glCd},#{glLevel},#{superCd},#{glName},#{balDir},#{startDt})
+  </insert>
+  <delete id="deleteGl" parameterType="sra.param.vo.Gl">
+     delete from T_DEF_GL 
+       where GL_CD = #{glCd} 
+  </delete>
+  <delete id="deleteGls" parameterType="Map">
+     delete from T_DEF_GL where GL_CD in 
+          <foreach item="item" index="index" collection="glIds" open="(" separator="," close=")" >
+				#{item}
+		  </foreach>
+  </delete>
+  <update id="updateGl" parameterType="sra.param.vo.Gl">
+     update T_DEF_GL 
+       <set>
+       <if test="glCd != null">GL_CD = #{glCd},</if>
+       <if test="glLevel != null">GL_LEVEL = #{glLevel},</if>
+       <if test="superCd != null">SUPER_CD = #{superCd},</if>
+       <if test="glName != null">GL_NAME = #{glName},</if>
+       <if test="balDir != null">BAL_DIR = #{balDir},</if>
+       <if test="startDt != null">START_DT = #{startDt},</if>
+       </set>
+       where GL_CD = #{glCd} 
+  </update>
+  <select id="loadGl" resultType="sra.param.vo.Gl" parameterType="sra.param.vo.Gl">
+     select 
+       GL_CD as glCd,
+       GL_LEVEL as glLevel,
+       SUPER_CD as superCd,
+       GL_NAME as glName,
+       BAL_DIR as balDir,
+       START_DT as startDt
+     from T_DEF_GL 
+     where GL_CD = #{glCd} 
+  </select>
+  <select id="queryGls" resultType="hashMap" parameterType="sra.param.vo.Gl"  teradataOrderBy="GL_CD">
+     select 
+       GL_CD as glCd,
+       GL_LEVEL as glLevel,
+       SUPER_CD as superCd,
+       GL_NAME as glName,
+       BAL_DIR as balDir,
+       START_DT as startDt
+     from T_DEF_GL where 1=1 
+       <if test="glCd != null"> 
+ and GL_CD = #{glCd} 
+ </if>
+       <if test="glLevel != null"> 
+ and GL_LEVEL = #{glLevel} 
+ </if>
+       <if test="superCd != null"> 
+ and SUPER_CD = #{superCd} 
+ </if>
+       <if test="glName != null"> 
+ and GL_NAME like #{glName} 
+ </if>
+       <if test="balDir != null"> 
+ and BAL_DIR = #{balDir} 
+ </if>
+       <if test="startDt != null"> 
+ and START_DT = #{startDt} 
+ </if>
+  </select>
+  <select id="queryGlTotal" resultType="hashMap" parameterType="sra.param.vo.Gl">
+     select count(1) cnt 
+     from T_DEF_GL where 1=1 
+       <if test="glCd != null"> 
+ and GL_CD = #{glCd} 
+ </if>
+       <if test="glLevel != null"> 
+ and GL_LEVEL = #{glLevel} 
+ </if>
+       <if test="superCd != null"> 
+ and SUPER_CD = #{superCd} 
+ </if>
+       <if test="glName != null"> 
+ and GL_NAME = #{glName} 
+ </if>
+       <if test="balDir != null"> 
+ and BAL_DIR = #{balDir} 
+ </if>
+       <if test="startDt != null"> 
+ and START_DT = #{startDt} 
+ </if>
+  </select>
+</mapper>
